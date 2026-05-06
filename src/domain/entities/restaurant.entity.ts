@@ -25,7 +25,7 @@ export interface RestaurantProps {
     updatedAt: Date;
 }
 
-interface RestaurantOutputDTO {
+export interface RestaurantOutputDTO {
   id: string
   name: string
   description?: string | null
