@@ -16,6 +16,17 @@ export interface CustomerProps {
     updatedAt: Date;
 }
 
+export interface CustomerOutputDTO{
+    id: string;
+    name: string;
+    email: string;
+    cpf: string;
+    phone: string;
+    birthDate: Date;
+    createdAt: Date;
+    updatedAt: Date;
+}
+
 export class Customer extends Entity<CustomerProps>{
     private static readonly MIN_AGE = 18;
     
@@ -88,6 +99,19 @@ export class Customer extends Entity<CustomerProps>{
 
         if(realAge < Customer.MIN_AGE){
             throw new TooYoungError(Customer.MIN_AGE)
+        }
+    }
+
+    toOutputDTO(): CustomerOutputDTO {
+        return {
+            id: this.id.value,
+            name: this._props.name.value,
+            email: this._props.email.value,
+            cpf: this._props.cpf.value,
+            phone: this._props.phone,
+            birthDate: this._props.birthDate,
+            createdAt: this._props.createdAt,
+            updatedAt: this._props.updatedAt
         }
     }
 
