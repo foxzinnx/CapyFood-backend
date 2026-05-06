@@ -22,6 +22,7 @@ export interface RestaurantRepository {
     findByOwnerId(ownerId: string): Promise<Restaurant | null>;
     findByMenuId(menuId: string): Promise<Restaurant | null>;
     list(filters: ListRestaurantsFilters): Promise<PaginatedResult<Restaurant>>;
+    findTopRated(limit: number): Promise<Restaurant[]>;
     save(restaurant: Restaurant): Promise<void>;
     delete(id: string): Promise<void>;
 }

@@ -1,3 +1,3 @@
-export interface GetTopRatedRestaurants {
+export interface GetTopRatedRestaurantsInput {
     limit?: number;
 }
