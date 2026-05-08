@@ -111,7 +111,7 @@ model Order {
   customerId   String
   Restaurant   Restaurant? @relation(fields: [restaurantId], references: [id])
   restaurantId String
-  OrderItem    OrderItem[]
+  items        OrderItem[]
   Customer     Customer    @relation(fields: [customerId], references: [id])
 }
 

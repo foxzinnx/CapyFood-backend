@@ -45,4 +45,16 @@ export class OrderMapper {
             updatedAt: order.updatedAt
         }
     }
+
+    static itemsToPrisma(order: Order){
+        return order.items.map((item) => ({
+            id: item.id.value,
+            orderId: order.id.value,
+            menuItemId: item.menuItemId.value,
+            menuItemName: item.menuItemName,
+            quantity: item.quantity,
+            unitPrice: item.unitPrice,
+            subtotal: item.subtotal,
+        }));
+    }
 }
