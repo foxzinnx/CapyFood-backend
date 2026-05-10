@@ -11,7 +11,7 @@ type ListCustomerOrdersResult = Either<
     ListCustomerOrdersOutput
 >
 
-export class ListCustomerOrders {
+export class ListCustomerOrdersUseCase {
     constructor(
         private readonly customerRepository: CustomerRepository,
         private readonly orderRepository: OrderRepository

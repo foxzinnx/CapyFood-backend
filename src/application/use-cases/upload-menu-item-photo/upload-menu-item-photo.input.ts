@@ -1,4 +1,4 @@
-export interface UpdateMenuItemPhotoInput{
+export interface UploadMenuItemPhotoInput{
     menuItemId: string;
     ownerId: string;
     fileName: string;

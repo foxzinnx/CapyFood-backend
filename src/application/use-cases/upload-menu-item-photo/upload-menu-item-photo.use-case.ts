@@ -4,25 +4,25 @@ import { ResourceNotFoundError } from "@/domain/errors/resource-not-found.error.
 import type { MenuItemRepository } from "@/domain/repositories/menu-item.repository.js";
 import type { RestaurantRepository } from "@/domain/repositories/restaurant.repository.js";
 import { left, right, type Either } from "@/shared/either.js";
-import type { UpdateMenuItemPhotoOutput } from "./update-menu-item-photo.output.js";
-import type { UpdateMenuItemPhotoInput } from "./update-menu-item-photo.input.js";
+import type { UploadMenuItemPhotoOutput } from "./update-menu-item-photo.output.js";
+import type { UploadMenuItemPhotoInput } from "./update-menu-item-photo.input.js";
 import type { StorageService } from "@/application/ports/storage-service.js";
 
 const ALLOWED_MIME_TYPES = ['image/jpeg', 'image/png', 'image/webp'];
 
 type UpdateMenuItemPhotoResult = Either<
     ResourceNotFoundError | NotAllowedError | InvalidFileTypeError,
-    UpdateMenuItemPhotoOutput
+    UploadMenuItemPhotoOutput
 >
 
-export class UpdateMenuItemPhotoUseCase {
+export class UploadMenuItemPhotoUseCase {
     constructor(
         private readonly restaurantRepository: RestaurantRepository,
         private readonly menuItemRepository: MenuItemRepository,
         private readonly storageService: StorageService
     ){}
 
-    async execute(input: UpdateMenuItemPhotoInput): Promise<UpdateMenuItemPhotoResult> {
+    async execute(input: UploadMenuItemPhotoInput): Promise<UpdateMenuItemPhotoResult> {
         if(!ALLOWED_MIME_TYPES.includes(input.fileType)){
             return left(new InvalidFileTypeError());
         }
