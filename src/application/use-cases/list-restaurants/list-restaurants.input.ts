@@ -1,7 +1,7 @@
 export interface ListRestaurantsInput {
-    search?: string;
-    city?: string;
-    isOpen?: boolean;
-    page?: number;
-    perPage?: number;
+    search?: string | undefined;
+    city?: string | undefined;
+    isOpen?: boolean | undefined;
+    page?: number | undefined;
+    perPage?: number | undefined;
 }

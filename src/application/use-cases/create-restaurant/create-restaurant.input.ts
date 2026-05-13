@@ -1,7 +1,7 @@
 export interface CreateRestaurantInput {
     ownerId: string;
     name: string;
-    description?: string;
+    description?: string | undefined;
     phone: string;
     address: string;
     city: string;

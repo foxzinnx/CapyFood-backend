@@ -8,7 +8,7 @@ interface JwtPayload {
 
 declare module 'fastify'{
     interface FastifyRequest {
-        user?: JwtPayload
+        user: JwtPayload
     }
 }
 

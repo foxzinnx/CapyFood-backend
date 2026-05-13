@@ -1,4 +1,4 @@
-export interface UpdateRestaurantPhotoInput {
+export interface UploadRestaurantPhotoInput {
     restaurantId: string;
     ownerId: string;
     fileName: string;
