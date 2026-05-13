@@ -1,7 +1,7 @@
 import z from "zod";
 
 export const createMenuItemSchema = z.object({
-    name: z.string().min(2),
+    name: z.string('MenuItem name is required').min(2),
     description: z.string().optional(),
     price: z.number().positive()
 });

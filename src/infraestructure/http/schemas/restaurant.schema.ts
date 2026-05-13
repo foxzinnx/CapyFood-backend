@@ -1,13 +1,13 @@
 import z from "zod";
 
 export const createRestaurantSchema = z.object({
-    name: z.string().min(2),
+    name: z.string('Name is required').min(2),
     description: z.string().optional(),
-    phone: z.string().min(10).max(11),
-    address: z.string().min(5),
-    city: z.string().min(2),
-    state: z.string().length(2),
-    zipCode: z.string().length(8)
+    phone: z.string('Phone is required').min(10).max(11),
+    address: z.string('Address is required').min(5),
+    city: z.string('City is required').min(2),
+    state: z.string('State is required').length(2),
+    zipCode: z.string('Zipcode is required').length(8)
 });
 
 export const listRestaurantsSchema = z.object({
