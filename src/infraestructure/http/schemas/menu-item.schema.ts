@@ -13,7 +13,7 @@ export const updateMenuItemSchema = z.object({
     isAvailable: z.boolean().optional()
 });
 
-export const getFeaturedMenuItems = z.object({
+export const getFeaturedMenuItemsSchema = z.object({
     limit: z.coerce.number().int().positive().max(30).optional()
 })
 
