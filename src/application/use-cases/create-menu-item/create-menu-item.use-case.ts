@@ -38,6 +38,7 @@ export class CreateMenuItemUseCase{
             name: input.name,
             description: input.description ?? null,
             price: input.price,
+            imageUrl: input.imageUrl ?? null,
             isAvailable: true,
             menuId: new UniqueEntityId(menuId)
         });
