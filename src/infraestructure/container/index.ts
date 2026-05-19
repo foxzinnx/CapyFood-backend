@@ -14,7 +14,7 @@ import { GetRestaurantUseCase } from "@/application/use-cases/get-restaurant/get
 import { ListRestaurantsUseCase } from "@/application/use-cases/list-restaurants/list-restaurants.use-case.js";
 import { ToggleRestaurantStatusUseCase } from "@/application/use-cases/toggle-restaurant-status/toggle-restaurant-status.use-case.js";
 import { UpdateRestaurantHoursUseCase } from "@/application/use-cases/update-restaurant-hours/update-restaurant-hours.use-case.js";
-import { UpdateRestaurantPhotoUseCase } from "@/application/use-cases/update-restaurant-photo/update-restaurant-photo.use-case.js";
+import { UploadRestaurantPhotoUseCase } from "@/application/use-cases/upload-restaurant-photo/upload-restaurant-photo.use-case.js";
 import { GetTopRatedRestaurantsUseCase } from "@/application/use-cases/get-top-rated-restaurants/get-top-rated-restaurants.use-case.js";
 import { CreateMenuItemUseCase } from "@/application/use-cases/create-menu-item/create-menu-item.use-case.js";
 import { UpdateMenuItemUseCase } from "@/application/use-cases/update-menu-item/update-menu-item.use-case.js";
@@ -52,7 +52,7 @@ export const getRestaurantUseCase = new GetRestaurantUseCase(restaurantRepositor
 export const listRestaurantsUseCase = new ListRestaurantsUseCase(restaurantRepository);
 export const toggleRestaurantStatusUseCase = new ToggleRestaurantStatusUseCase(restaurantRepository);
 export const updateRestaurantHoursUseCase = new UpdateRestaurantHoursUseCase(restaurantRepository);
-export const updateRestaurantPhotoUseCase = new UpdateRestaurantPhotoUseCase(restaurantRepository, storageService);
+export const uploadRestaurantPhotoUseCase = new UploadRestaurantPhotoUseCase(restaurantRepository, storageService);
 export const getTopRatedRestaurantsUseCase = new GetTopRatedRestaurantsUseCase(restaurantRepository, reviewRepository);
 
 export const createMenuItemUseCase = new CreateMenuItemUseCase(restaurantRepository, menuItemRepository);

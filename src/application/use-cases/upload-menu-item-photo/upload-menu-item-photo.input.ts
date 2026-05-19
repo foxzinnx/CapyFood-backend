@@ -3,5 +3,5 @@ export interface UploadMenuItemPhotoInput{
     ownerId: string;
     fileName: string;
     fileType: string;
-    fileBuffer: string;
+    fileBuffer: Buffer;
 }

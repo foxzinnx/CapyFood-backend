@@ -3,5 +3,5 @@ export interface UploadRestaurantPhotoInput {
     ownerId: string;
     fileName: string;
     fileType: string;
-    fileBuffer: string;
+    fileBuffer: Buffer;
 }
