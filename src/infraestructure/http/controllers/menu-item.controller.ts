@@ -1,19 +1,56 @@
 import type { FastifyReply, FastifyRequest } from "fastify";
 import { restaurantIdSchema } from "../schemas/restaurant.schema.js";
 import { createMenuItemSchema, getFeaturedMenuItemsSchema, menuItemIdSchema, updateMenuItemSchema } from "../schemas/menu-item.schema.js";
-import { createMenuItemUseCase, deleteMenuItemUseCase, getFeaturedMenuItemsUseCase, listMenuItemsUseCase, updateMenuItemUseCase, uploadMenuItemPhotoUseCase } from "@/infraestructure/container/index.js";
+import { createMenuItemUseCase, deleteMenuItemUseCase, getFeaturedMenuItemsUseCase, listMenuItemsUseCase, storageService, updateMenuItemUseCase, uploadMenuItemPhotoUseCase } from "@/infraestructure/container/index.js";
 import { handleError } from "../helpers/handle-error.js";
+import type { MultipartFile } from "@fastify/multipart";
+
+const ALLOWED_MIME_TYPES = ['image/jpeg', 'image/png', 'image/webp']
 
 export class MenuItemController {
     async createMenuItem(request: FastifyRequest, reply: FastifyReply): Promise<void>{
         const { restaurantId } = restaurantIdSchema.parse(request.params);
-        const body = createMenuItemSchema.parse(request.body);
         const ownerId = request.user.sub;
+
+        const parts = request.parts();
+
+        const fields: Record<string, string> = {};
+        let imageFile: MultipartFile | undefined;
+
+        for await (const part of parts){
+            if(part.type === 'file'){
+                imageFile = part;
+            } else {
+                fields[part.fieldname] = part.value as string
+            }
+        }
+        
+        const body = createMenuItemSchema.parse(request.body);
+
+        let imageUrl: string | undefined;
+
+        if (imageFile) {
+            if (!ALLOWED_MIME_TYPES.includes(imageFile.mimetype)) {
+                return reply.status(400).send({
+                    message: 'Invalid image format. Use JPEG, PNG, or WebP',
+                })
+            }
+
+            const fileBuffer = await imageFile.toBuffer()
+
+            imageUrl = await storageService.upload({
+                fileName: imageFile.filename,
+                fileType: imageFile.mimetype,
+                fileBuffer,
+                folder: 'menu-items',
+            })
+        }
 
         const result = await createMenuItemUseCase.execute({
             ownerId,
             restaurantId,
             ...body,
+            imageUrl
         });
 
         if(result.isLeft()){

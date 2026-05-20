@@ -74,3 +74,5 @@ export const createReviewUseCase = new CreateReviewUseCase(customerRepository, r
 export const updateReviewUseCase = new UpdateReviewUseCase(reviewRepository);
 export const deleteReviewUseCase = new DeleteReviewUseCase(reviewRepository);
 export const listRestaurantReviewsUseCase = new ListRestaurantReviewsUseCase(restaurantRepository, reviewRepository);
+
+export { storageService }
