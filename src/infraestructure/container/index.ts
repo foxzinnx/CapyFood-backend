@@ -32,6 +32,9 @@ import { CreateReviewUseCase } from "@/application/use-cases/create-review/creat
 import { UpdateReviewUseCase } from "@/application/use-cases/update-review/update-review.use-case.js";
 import { DeleteReviewUseCase } from "@/application/use-cases/delete-review/delete-review.use-case.js";
 import { ListRestaurantReviewsUseCase } from "@/application/use-cases/list-restaurant-reviews/list-restaurant-reviews.use-case.js";
+import { GetOrderUseCase } from "@/application/use-cases/get-order/get-order.use-case.js";
+import { UpdateOrderStatusUseCase } from "@/application/use-cases/update-order-status/update-order-status.use-case.js";
+import { CancelOrderUseCase } from "@/application/use-cases/cancel-order/cancel-order.use-case.js";
 
 const ownerRepository = new PrismaRestaurantOwnerRepository();
 const restaurantRepository = new PrismaRestaurantRepository();
@@ -67,8 +70,11 @@ export const authenticateCustomerUseCase = new AuthenticateCustomerUseCase(custo
 export const getCustomerProfileUseCase = new GetCustomerProfileUseCase(customerRepository);
 
 export const createOrderUseCase = new CreateOrderUseCase(customerRepository, restaurantRepository, menuItemRepository, orderRepository);
+export const getOrderUseCase = new GetOrderUseCase(orderRepository, restaurantRepository);
 export const listCustomerOrdersUseCase = new ListCustomerOrdersUseCase(customerRepository, orderRepository);
 export const listRestaurantOrdersUseCase = new ListRestaurantOrdersUseCase(restaurantRepository, orderRepository);
+export const updateOrderStatusUseCase = new UpdateOrderStatusUseCase(orderRepository, restaurantRepository);
+export const cancelOrderUseCase = new CancelOrderUseCase(orderRepository);
 
 export const createReviewUseCase = new CreateReviewUseCase(customerRepository, restaurantRepository, reviewRepository);
 export const updateReviewUseCase = new UpdateReviewUseCase(reviewRepository);
