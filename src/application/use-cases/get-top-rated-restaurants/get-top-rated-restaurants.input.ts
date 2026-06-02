@@ -1,3 +1,3 @@
 export interface GetTopRatedRestaurantsInput {
-    limit?: number;
+    limit?: number | undefined;
 }

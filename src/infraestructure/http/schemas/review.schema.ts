@@ -10,11 +10,15 @@ export const updateReviewSchema = z.object({
     description: z.string().max(500).optional()
 });
 
-export const reviewQuerySchema = z.object({
+export const listReviewsQuerySchema = z.object({
     page: z.coerce.number().int().positive().optional(),
     perPage: z.coerce.number().int().positive().max(50).optional(),
 })
 
 export const reviewIdSchema = z.object({
     reviewId: z.uuid()
+})
+
+export const reviewParamsSchema = z.object({
+    restaurantId: z.uuid()
 })

@@ -1,6 +1,6 @@
 export interface ListRestaurantOrdersInput{
     restaurantId: string;
     ownerId: string;
-    page?: number;
-    perPage?: number;
+    page?: number | undefined;
+    perPage?: number | undefined;
 }

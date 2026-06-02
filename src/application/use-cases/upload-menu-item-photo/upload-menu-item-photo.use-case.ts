@@ -4,8 +4,8 @@ import { ResourceNotFoundError } from "@/domain/errors/resource-not-found.error.
 import type { MenuItemRepository } from "@/domain/repositories/menu-item.repository.js";
 import type { RestaurantRepository } from "@/domain/repositories/restaurant.repository.js";
 import { left, right, type Either } from "@/shared/either.js";
-import type { UploadMenuItemPhotoOutput } from "./update-menu-item-photo.output.js";
-import type { UploadMenuItemPhotoInput } from "./update-menu-item-photo.input.js";
+import type { UploadMenuItemPhotoOutput } from "./upload-menu-item-photo.output.js";
+import type { UploadMenuItemPhotoInput } from "./upload-menu-item-photo.input.js";
 import type { StorageService } from "@/application/ports/storage-service.js";
 
 const ALLOWED_MIME_TYPES = ['image/jpeg', 'image/png', 'image/webp'];

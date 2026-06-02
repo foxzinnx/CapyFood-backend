@@ -1,5 +1,5 @@
 export interface ListCustomerOrdersInput {
     customerId: string;
-    page?: number;
-    perPage?: number;
+    page?: number | undefined;
+    perPage?: number | undefined;
 }

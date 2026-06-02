@@ -1,3 +1,3 @@
 export interface GetFeaturedMenuItemsInput {
-    limit?: number;
+    limit?: number | undefined;
 }

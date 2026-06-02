@@ -1,8 +1,8 @@
 export interface UpdateMenuItemInput{
     menuItemId: string;
     ownerId: string;
-    name?: string;
-    description?: string | null;
-    price?: number;
-    isAvailable?: boolean;
+    name?: string | undefined;
+    description?: string | null | undefined;
+    price?: number | undefined;
+    isAvailable?: boolean | undefined;
 }
