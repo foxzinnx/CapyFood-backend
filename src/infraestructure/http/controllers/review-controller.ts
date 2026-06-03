@@ -40,7 +40,7 @@ export class ReviewController {
         return reply.status(200).send(result.value);
     }
 
-    async deleteReviewUseCase(request: FastifyRequest, reply: FastifyReply): Promise<void>{
+    async deleteReview(request: FastifyRequest, reply: FastifyReply): Promise<void>{
         const { reviewId } = reviewIdSchema.parse(request.params);
         const customerId = request.user.sub;
 
