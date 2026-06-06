@@ -23,7 +23,7 @@ export class CloudinaryStorageService implements StorageService {
         },
         (error, result) => {
           if (error || !result) {
-            return reject(error ?? new Error('Falha ao fazer upload para o Cloudinary'))
+            return reject(error ?? new Error('Failed to upload to Cloudinary.'))
           }
           resolve(result.secure_url)
         },
