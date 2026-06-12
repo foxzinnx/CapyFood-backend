@@ -1,6 +1,6 @@
 export interface UpdateReviewInput {
     reviewId: string;
     customerId: string;
-    rating?: number;
-    description?: string | null;
+    rating?: number | undefined;
+    description?: string | null | undefined;
 }

@@ -1,5 +1,5 @@
 export interface ListRestaurantReviewsInput {
     restaurantId: string;
-    page?: number;
-    perPage?: number;
+    page?: number | undefined;
+    perPage?: number | undefined;
 }
