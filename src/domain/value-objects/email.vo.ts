@@ -28,8 +28,17 @@ export class Email {
         return this._value
     }
 
-    private static isValid(value: string): boolean {
-        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
-        return emailRegex.test(value);
+    private static isValid(email: string): boolean {
+        const emailRegex = /^[a-zA-Z0-9._%+\-]+@[a-zA-Z0-9.\-]+\.[a-zA-Z]{2,10}$/;
+        if(!emailRegex.test(email)) return false;
+        
+        const [local, domain] = email.split('@');
+
+        if(local?.startsWith('.') || local?.endsWith('.')) return false;
+        if(local?.includes('..')) return false;
+        if(domain?.startsWith('-') || domain?.endsWith('-')) return false;
+        if(domain?.startsWith('.') || domain?.endsWith('.')) return false;
+
+        return true;
     }
 }
