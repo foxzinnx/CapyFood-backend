@@ -20,6 +20,10 @@ export class Rating {
         return this._value;
     }
 
+    toString(): string {
+        return this._value === 1 ? `${this._value} star` : `${this._value} stars`
+    }
+
     equals(rating: Rating): boolean {
         return this._value === rating.value
     }
