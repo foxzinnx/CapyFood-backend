@@ -113,6 +113,8 @@ model Order {
   restaurantId String
   items        OrderItem[]
   Customer     Customer    @relation(fields: [customerId], references: [id])
+
+  @@map("orders")
 }
 
 model OrderItem {
