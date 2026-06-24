@@ -41,6 +41,16 @@ export interface RestaurantOutputDTO {
   updatedAt: Date
 }
 
+export interface UpdateRestaurantInfoData {
+  name?: string
+  description?: string | null
+  phone?: string
+  address?: string
+  city?: string
+  state?: string
+  zipCode?: string
+}
+
 export class Restaurant extends Entity<RestaurantProps>{
     private constructor(props: RestaurantProps, id?: UniqueEntityId){
         super(props, id);
@@ -101,8 +111,35 @@ export class Restaurant extends Entity<RestaurantProps>{
         this.touch();
     }
 
-    updateInfo(data: Partial<Pick<RestaurantProps, 'name' | 'description' | 'phone' | 'address' | 'city' | 'state' | 'zipCode'>>): void {
-        Object.assign(this._props, data);
+    updateInfo(data: UpdateRestaurantInfoData): void {
+        if (data.name !== undefined) {
+            this._props.name = Name.create(data.name)
+        }
+
+        if (data.description !== undefined) {
+            this._props.description = data.description
+        }
+
+        if (data.phone !== undefined) {
+            this._props.phone = data.phone
+        }
+
+        if (data.address !== undefined) {
+            this._props.address = data.address
+        }
+
+        if (data.city !== undefined) {
+            this._props.city = data.city
+        }
+
+        if (data.state !== undefined) {
+            this._props.state = data.state
+        }
+
+        if (data.zipCode !== undefined) {
+            this._props.zipCode = data.zipCode
+        }
+
         this.touch()
     }
 

@@ -38,7 +38,7 @@ export class MenuItem extends Entity<MenuItemProps>{
     }
 
     static create(props: Omit<MenuItemProps, 'createdAt' | 'updatedAt' | 'name'> & { name: string }, id?: UniqueEntityId): MenuItem {
-        if(props.price < 0){
+        if(props.price <= 0){
             throw new Error('The item\'s price must be greater than zero.')
         }
         const name = Name.create(props.name)
