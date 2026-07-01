@@ -3,6 +3,12 @@ import type { ListRestaurantsFilters, PaginatedResult, RestaurantRepository } fr
 
 export class InMemoryRestaurantRepository implements RestaurantRepository {
     public items: Restaurant[] = [];
+
+    public menuRestaurantMap: Map<string, string> = new Map();
+
+    linkMenuToRestaurant(menuId: string, restaurantId: string): void {
+        this.menuRestaurantMap.set(menuId, restaurantId)
+    }
     
     async create(restaurant: Restaurant): Promise<void> {
         this.items.push(restaurant);
@@ -17,7 +23,9 @@ export class InMemoryRestaurantRepository implements RestaurantRepository {
     }
 
     async findByMenuId(menuId: string): Promise<Restaurant | null> {
-        return null;
+        const restaurantId = this.menuRestaurantMap.get(menuId);
+        if(!restaurantId) return null;
+        return this.items.find((r) => r.id.value === restaurantId) ?? null;
     }
 
     async list(filters: ListRestaurantsFilters): Promise<PaginatedResult<Restaurant>> {
