@@ -27,7 +27,7 @@ export class UpdateOrderStatusUseCase{
             return left(new ResourceNotFoundError('Order'));
         }
 
-        const restaurant = await this.restaurantRepository.findByOwnerId(input.ownerId);
+        const restaurant = await this.restaurantRepository.findById(order.restaurantId.value);
         if(!restaurant){
             return left(new ResourceNotFoundError('Restaurant'));
         }

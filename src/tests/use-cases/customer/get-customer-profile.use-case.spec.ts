@@ -83,5 +83,5 @@ describe('GetCustomerProfileUseCase', () => {
         if(result.isLeft()){
             expect(result.value).toBeInstanceOf(ResourceNotFoundError)
         }
-    })
+    }) 
 })
