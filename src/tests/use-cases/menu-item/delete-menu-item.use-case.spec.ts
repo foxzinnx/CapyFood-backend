@@ -1,4 +1,4 @@
-import { DeleteMenuItemUseCase } from "@/application/use-cases/delete-menu-item/delete-menu-item.use-case.js";
+import { DeleteMenuItemUseCase } from "@/application/use-cases/menu-item/delete-menu-item/delete-menu-item.use-case.js";
 import { MenuItem } from "@/domain/entities/menu-item.entity.js";
 import { Restaurant } from "@/domain/entities/restaurant.entity.js";
 import { NotAllowedError } from "@/domain/errors/not-allowed.error.js";

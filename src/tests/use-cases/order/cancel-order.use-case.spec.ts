@@ -1,4 +1,4 @@
-import { CancelOrderUseCase } from "@/application/use-cases/cancel-order/cancel-order.use-case.js"
+import { CancelOrderUseCase } from "@/application/use-cases/order/cancel-order/cancel-order.use-case.js"
 import { NotAllowedError } from "@/domain/errors/not-allowed.error.js"
 import { OrderAlreadyCancelledError } from "@/domain/errors/order-already-cancelled.error.js"
 import { OrderCannotBeCancelledError } from "@/domain/errors/order-cannot-be-cancelled.error.js"

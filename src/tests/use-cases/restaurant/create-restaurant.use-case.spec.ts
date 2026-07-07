@@ -1,4 +1,4 @@
-import { CreateRestaurantUseCase } from "@/application/use-cases/create-restaurant/create-restaurant.use-case.js";
+import { CreateRestaurantUseCase } from "@/application/use-cases/restaurant/create-restaurant/create-restaurant.use-case.js";
 import { RestaurantOwner } from "@/domain/entities/restaurant-owner.entity.js";
 import { ResourceNotFoundError } from "@/domain/errors/resource-not-found.error.js";
 import { RestaurantAlreadyExistsError } from "@/domain/errors/restaurant-already-exists.error.js";

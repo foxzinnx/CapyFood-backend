@@ -1,5 +1,5 @@
-import { ListCustomerOrdersUseCase } from "@/application/use-cases/list-customer-orders/list-customer-orders.use-case.js"
-import { ListRestaurantOrdersUseCase } from "@/application/use-cases/list-restaurant-orders/list-restaurant-orders.use-case.js"
+import { ListCustomerOrdersUseCase } from "@/application/use-cases/order/list-customer-orders/list-customer-orders.use-case.js"
+import { ListRestaurantOrdersUseCase } from "@/application/use-cases/order/list-restaurant-orders/list-restaurant-orders.use-case.js"
 import { NotAllowedError } from "@/domain/errors/not-allowed.error.js"
 import { ResourceNotFoundError } from "@/domain/errors/resource-not-found.error.js"
 import { makeCustomer, makeMenuItem, makeOrder, makeRestaurant } from "@/tests/helpers/make-order-test-entities.js"

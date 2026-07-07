@@ -1,4 +1,4 @@
-import { CreateOrderUseCase } from "@/application/use-cases/create-order/create-order.use-case.js";
+import { CreateOrderUseCase } from "@/application/use-cases/order/create-order/create-order.use-case.js";
 import { MenuItemUnavailableError } from "@/domain/errors/menu-item-unavailable.error.js";
 import { ResourceNotFoundError } from "@/domain/errors/resource-not-found.error.js";
 import { RestaurantClosedError } from "@/domain/errors/restaurant-closed.error.js";

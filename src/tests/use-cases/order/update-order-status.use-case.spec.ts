@@ -1,4 +1,4 @@
-import { UpdateOrderStatusUseCase } from "@/application/use-cases/update-order-status/update-order-status.use-case.js"
+import { UpdateOrderStatusUseCase } from "@/application/use-cases/order/update-order-status/update-order-status.use-case.js"
 import { InvalidOrderStatusTransitionError } from "@/domain/errors/invalid-order-status-transition.error.js"
 import { NotAllowedError } from "@/domain/errors/not-allowed.error.js"
 import { ResourceNotFoundError } from "@/domain/errors/resource-not-found.error.js"

@@ -1,4 +1,4 @@
-import { GetCustomerProfileUseCase } from "@/application/use-cases/get-customer-profile/get-customer-profile.use-case.js";
+import { GetCustomerProfileUseCase } from "@/application/use-cases/customer/get-customer-profile/get-customer-profile.use-case.js";
 import { Customer } from "@/domain/entities/customer.entity.js";
 import { ResourceNotFoundError } from "@/domain/errors/resource-not-found.error.js";
 import { CPF } from "@/domain/value-objects/cpf.vo.js";

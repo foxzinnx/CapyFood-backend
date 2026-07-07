@@ -1,4 +1,4 @@
-import { UpdateReviewUseCase } from "@/application/use-cases/update-review/update-review.use-case.js"
+import { UpdateReviewUseCase } from "@/application/use-cases/review/update-review/update-review.use-case.js"
 import { Review } from "@/domain/entities/review.entity.js";
 import { NotAllowedError } from "@/domain/errors/not-allowed.error.js";
 import { ResourceNotFoundError } from "@/domain/errors/resource-not-found.error.js";

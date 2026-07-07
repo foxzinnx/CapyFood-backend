@@ -1,4 +1,4 @@
-import { UpdateRestaurantHoursUseCase } from "@/application/use-cases/update-restaurant-hours/update-restaurant-hours.use-case.js";
+import { UpdateRestaurantHoursUseCase } from "@/application/use-cases/restaurant/update-restaurant-hours/update-restaurant-hours.use-case.js";
 import { Restaurant } from "@/domain/entities/restaurant.entity.js";
 import { NotAllowedError } from "@/domain/errors/not-allowed.error.js";
 import { ResourceNotFoundError } from "@/domain/errors/resource-not-found.error.js";

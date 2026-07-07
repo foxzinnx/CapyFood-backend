@@ -1,4 +1,4 @@
-import { AuthenticateCustomerUseCase } from "@/application/use-cases/authenticate-customer/authenticate-customer.use-case.js";
+import { AuthenticateCustomerUseCase } from "@/application/use-cases/customer/authenticate-customer/authenticate-customer.use-case.js";
 import { Customer } from "@/domain/entities/customer.entity.js";
 import { InvalidCredentialsError } from "@/domain/errors/invalid-credentials.error.js";
 import { CPF } from "@/domain/value-objects/cpf.vo.js";

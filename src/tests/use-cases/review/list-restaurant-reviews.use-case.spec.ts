@@ -1,4 +1,4 @@
-import { ListRestaurantReviewsUseCase } from "@/application/use-cases/list-restaurant-reviews/list-restaurant-reviews.use-case.js"
+import { ListRestaurantReviewsUseCase } from "@/application/use-cases/review/list-restaurant-reviews/list-restaurant-reviews.use-case.js"
 import { Restaurant } from "@/domain/entities/restaurant.entity.js"
 import { Review } from "@/domain/entities/review.entity.js"
 import { ResourceNotFoundError } from "@/domain/errors/resource-not-found.error.js"

@@ -1,4 +1,4 @@
-import { GetRestaurantUseCase } from "@/application/use-cases/get-restaurant/get-restaurant.use-case.js";
+import { GetRestaurantUseCase } from "@/application/use-cases/restaurant/get-restaurant/get-restaurant.use-case.js";
 import { Restaurant } from "@/domain/entities/restaurant.entity.js";
 import { ResourceNotFoundError } from "@/domain/errors/resource-not-found.error.js";
 import { UniqueEntityId } from "@/domain/value-objects/unique-entity-id.vo.js";

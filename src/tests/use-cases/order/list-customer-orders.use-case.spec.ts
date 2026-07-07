@@ -1,4 +1,4 @@
-import { ListCustomerOrdersUseCase } from "@/application/use-cases/list-customer-orders/list-customer-orders.use-case.js"
+import { ListCustomerOrdersUseCase } from "@/application/use-cases/order/list-customer-orders/list-customer-orders.use-case.js"
 import { ResourceNotFoundError } from "@/domain/errors/resource-not-found.error.js"
 import { makeCustomer, makeMenuItem, makeOrder, makeRestaurant } from "@/tests/helpers/make-order-test-entities.js"
 import { InMemoryCustomerRepository } from "@/tests/repositories/in-memory-customer.repository.js"

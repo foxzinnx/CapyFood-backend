@@ -1,4 +1,4 @@
-import { GetTopRatedRestaurantsUseCase } from "@/application/use-cases/get-top-rated-restaurants/get-top-rated-restaurants.use-case.js";
+import { GetTopRatedRestaurantsUseCase } from "@/application/use-cases/restaurant/get-top-rated-restaurants/get-top-rated-restaurants.use-case.js";
 import { Restaurant } from "@/domain/entities/restaurant.entity.js";
 import { Review } from "@/domain/entities/review.entity.js";
 import { UniqueEntityId } from "@/domain/value-objects/unique-entity-id.vo.js";

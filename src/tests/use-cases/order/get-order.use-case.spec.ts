@@ -1,4 +1,4 @@
-import { GetOrderUseCase } from "@/application/use-cases/get-order/get-order.use-case.js"
+import { GetOrderUseCase } from "@/application/use-cases/order/get-order/get-order.use-case.js"
 import { NotAllowedError } from "@/domain/errors/not-allowed.error.js"
 import { ResourceNotFoundError } from "@/domain/errors/resource-not-found.error.js"
 import { makeCustomer, makeMenuItem, makeOrder, makeRestaurant } from "@/tests/helpers/make-order-test-entities.js"

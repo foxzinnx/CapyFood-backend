@@ -1,4 +1,4 @@
-import { GetFeaturedMenuItemsUseCase } from "@/application/use-cases/get-featured-menu-items/get-featured-menu-items.use-case.js";
+import { GetFeaturedMenuItemsUseCase } from "@/application/use-cases/menu-item/get-featured-menu-items/get-featured-menu-items.use-case.js";
 import { MenuItem } from "@/domain/entities/menu-item.entity.js";
 import { UniqueEntityId } from "@/domain/value-objects/unique-entity-id.vo.js";
 import { InMemoryMenuItemRepository } from "@/tests/repositories/in-memory-menu-item.repository.js";

@@ -1,4 +1,4 @@
-import { AuthenticateRestaurantOwnerUseCase } from "@/application/use-cases/authenticate-restaurant-owner/authenticate-restaurant-owner.use-case.js";
+import { AuthenticateRestaurantOwnerUseCase } from "@/application/use-cases/restaurant-owner/authenticate-restaurant-owner/authenticate-restaurant-owner.use-case.js";
 import { RestaurantOwner } from "@/domain/entities/restaurant-owner.entity.js";
 import { InvalidCredentialsError } from "@/domain/errors/invalid-credentials.error.js";
 import { CNPJ } from "@/domain/value-objects/cnpj.vo.js";

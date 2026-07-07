@@ -1,4 +1,4 @@
-import { UploadRestaurantPhotoUseCase } from "@/application/use-cases/upload-restaurant-photo/upload-restaurant-photo.use-case.js";
+import { UploadRestaurantPhotoUseCase } from "@/application/use-cases/restaurant/upload-restaurant-photo/upload-restaurant-photo.use-case.js";
 import { Restaurant } from "@/domain/entities/restaurant.entity.js";
 import { NotAllowedError } from "@/domain/errors/not-allowed.error.js";
 import { ResourceNotFoundError } from "@/domain/errors/resource-not-found.error.js";

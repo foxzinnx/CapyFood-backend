@@ -1,4 +1,4 @@
-import { CreateRestaurantOwnerUseCase } from "@/application/use-cases/create-restaurant-owner/create-restaurant-owner.use-case.js";
+import { CreateRestaurantOwnerUseCase } from "@/application/use-cases/restaurant-owner/create-restaurant-owner/create-restaurant-owner.use-case.js";
 import { CnpjAlreadyInUseError } from "@/domain/errors/cnpj-already-in-use.error.js";
 import { EmailAlreadyInUseError } from "@/domain/errors/email-already-in-use.error.js";
 import { FakeHasher } from "@/tests/fakes/fake-hasher.js";

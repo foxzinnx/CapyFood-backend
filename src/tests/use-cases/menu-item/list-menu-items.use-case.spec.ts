@@ -1,4 +1,4 @@
-import { ListMenuItemsUseCase } from "@/application/use-cases/list-menu-items/list-menu-items.use-case.js";
+import { ListMenuItemsUseCase } from "@/application/use-cases/menu-item/list-menu-items/list-menu-items.use-case.js";
 import { MenuItem } from "@/domain/entities/menu-item.entity.js";
 import { Restaurant } from "@/domain/entities/restaurant.entity.js";
 import { UniqueEntityId } from "@/domain/value-objects/unique-entity-id.vo.js";

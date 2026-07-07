@@ -1,4 +1,4 @@
-import { ToggleRestaurantStatusUseCase } from "@/application/use-cases/toggle-restaurant-status/toggle-restaurant-status.use-case.js";
+import { ToggleRestaurantStatusUseCase } from "@/application/use-cases/restaurant/toggle-restaurant-status/toggle-restaurant-status.use-case.js";
 import { Restaurant } from "@/domain/entities/restaurant.entity.js";
 import { NotAllowedError } from "@/domain/errors/not-allowed.error.js";
 import { ResourceNotFoundError } from "@/domain/errors/resource-not-found.error.js";

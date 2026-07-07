@@ -1,4 +1,4 @@
-import { UploadMenuItemPhotoUseCase } from "@/application/use-cases/upload-menu-item-photo/upload-menu-item-photo.use-case.js";
+import { UploadMenuItemPhotoUseCase } from "@/application/use-cases/menu-item/upload-menu-item-photo/upload-menu-item-photo.use-case.js";
 import { MenuItem } from "@/domain/entities/menu-item.entity.js";
 import { Restaurant } from "@/domain/entities/restaurant.entity.js";
 import { NotAllowedError } from "@/domain/errors/not-allowed.error.js";

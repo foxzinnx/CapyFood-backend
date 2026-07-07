@@ -1,4 +1,4 @@
-import { CreateCustomerUseCase } from "@/application/use-cases/create-customer/create-customer.use-case.js";
+import { CreateCustomerUseCase } from "@/application/use-cases/customer/create-customer/create-customer.use-case.js";
 import { CpfAlreadyInUseError } from "@/domain/errors/cpf-already-in-use.error.js";
 import { EmailAlreadyInUseError } from "@/domain/errors/email-already-in-use.error.js";
 import { FakeHasher } from "@/tests/fakes/fake-hasher.js";

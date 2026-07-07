@@ -1,4 +1,4 @@
-import { CreateMenuItemUseCase } from "@/application/use-cases/create-menu-item/create-menu-item.use-case.js";
+import { CreateMenuItemUseCase } from "@/application/use-cases/menu-item/create-menu-item/create-menu-item.use-case.js";
 import { Restaurant } from "@/domain/entities/restaurant.entity.js";
 import { NotAllowedError } from "@/domain/errors/not-allowed.error.js";
 import { ResourceNotFoundError } from "@/domain/errors/resource-not-found.error.js";

@@ -1,4 +1,4 @@
-import { CreateReviewUseCase } from "@/application/use-cases/create-review/create-review.use-case.js"
+import { CreateReviewUseCase } from "@/application/use-cases/review/create-review/create-review.use-case.js"
 import { Customer } from "@/domain/entities/customer.entity.js"
 import { Restaurant } from "@/domain/entities/restaurant.entity.js"
 import { CannotReviewOwnRestaurantError } from "@/domain/errors/cannot-review-own-restaurant.error.js"

@@ -1,4 +1,4 @@
-import { ListRestaurantsUseCase } from "@/application/use-cases/list-restaurants/list-restaurants.use-case.js";
+import { ListRestaurantsUseCase } from "@/application/use-cases/restaurant/list-restaurants/list-restaurants.use-case.js";
 import { Restaurant } from "@/domain/entities/restaurant.entity.js";
 import { UniqueEntityId } from "@/domain/value-objects/unique-entity-id.vo.js";
 import { InMemoryRestaurantRepository } from "@/tests/repositories/in-memory-restaurant.repository.js";
