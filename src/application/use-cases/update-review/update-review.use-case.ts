@@ -29,7 +29,7 @@ export class UpdateReviewUseCase {
             review.changeRating(input.rating);
         }
 
-        if(input.description){
+        if(input.description !== undefined){
             review.changeDescription(input.description);
         }
 
