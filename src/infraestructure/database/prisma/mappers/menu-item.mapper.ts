@@ -1,17 +1,20 @@
 import { MenuItem } from "@/domain/entities/menu-item.entity.js";
+import { Name } from "@/domain/value-objects/name.vo.js";
 import { UniqueEntityId } from "@/domain/value-objects/unique-entity-id.vo.js";
 import type { MenuItem as PrismaMenuItem } from "@/generated/prisma/client.js";
 
 export class MenuItemMapper{
     static toDomain(raw: PrismaMenuItem): MenuItem {
-        return MenuItem.create(
+        return MenuItem.reconstitute(
             {
-                name: raw.name,
+                name: Name.create(raw.name),
                 description: raw.description,
                 price: raw.price.toNumber(),
                 imageUrl: raw.imageUrl,
                 isAvailable: raw.isAvailable,
                 menuId: new UniqueEntityId(raw.menuId),
+                createdAt: raw.createdAt,
+                updatedAt: raw.updatedAt
             },
             new UniqueEntityId(raw.id)
         )
