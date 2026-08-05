@@ -13,6 +13,8 @@ export interface RestaurantOwnerProps {
     cnpj: CNPJ;
     phone: string;
     birthDate: Date;
+    payflowMerchantId: string | null;
+    payflowWalletId: string | null;
     createdAt: Date;
     updatedAt: Date;
 }
@@ -39,12 +41,18 @@ export class RestaurantOwner extends Entity<RestaurantOwnerProps>{
         )
     }
 
+    static reconstitute(props: RestaurantOwnerProps, id: UniqueEntityId): RestaurantOwner {
+        return new RestaurantOwner(props, id);
+    }
+
     get name(): Name { return this._props.name }
     get email(): Email { return this._props.email }
     get password(): string { return this._props.password }
     get cnpj(): CNPJ { return this._props.cnpj }
     get phone(): string { return this._props.phone }
     get birthDate(): Date { return this._props.birthDate }
+    get payflowMerchantId(): string | null { return this._props.payflowMerchantId }
+    get payflowWalletId(): string | null { return this._props.payflowWalletId }
     get createdAt(): Date { return this._props.createdAt }
     get updatedAt(): Date { return this._props.updatedAt }
 
@@ -73,6 +81,12 @@ export class RestaurantOwner extends Entity<RestaurantOwnerProps>{
         RestaurantOwner.validateAge(birthDate);
         this._props.birthDate = birthDate;
         this.touch();
+    }
+
+    linkToPayFlow(merchantId: string, walletId: string): void {
+        this._props.payflowMerchantId = merchantId;
+        this._props.payflowWalletId = walletId;
+        this._props.updatedAt = new Date();
     }
 
     private static validateAge(birthDate: Date): void {

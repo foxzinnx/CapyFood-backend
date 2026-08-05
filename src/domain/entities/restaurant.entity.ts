@@ -72,6 +72,10 @@ export class Restaurant extends Entity<RestaurantProps>{
         )
     }
 
+    static reconstitute(props: RestaurantProps, id: UniqueEntityId): Restaurant {
+        return new Restaurant(props, id);
+    }
+
     get name(): Name { return this._props.name }
     get description(): string | null { return this._props.description ?? null }
     get logoUrl(): string | null { return this._props.logoUrl ?? null }

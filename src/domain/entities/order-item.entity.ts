@@ -28,6 +28,10 @@ export class OrderItem extends Entity<OrderItemProps>{
         return new OrderItem(props, id);
     }
 
+    static reconstitute(props: OrderItemProps, id: UniqueEntityId): OrderItem {
+        return new OrderItem(props, id);
+    }
+
     get menuItemId(): UniqueEntityId { return this._props.menuItemId }
     get menuItemName(): string { return this._props.menuItemName }
     get quantity(): number { return this._props.quantity }

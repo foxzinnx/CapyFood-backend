@@ -48,6 +48,10 @@ export class Review extends Entity<ReviewProps>{
         )
     }
 
+    static reconstitute(props: ReviewProps, id: UniqueEntityId): Review {
+        return new Review(props, id);
+    }
+
     get customerId(): UniqueEntityId { return this._props.customerId }
     get restaurantId(): UniqueEntityId { return this._props.restaurantId }
     get rating(): Rating { return this._props.rating }

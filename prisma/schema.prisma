@@ -22,6 +22,10 @@ model RestaurantOwner {
   cnpj      String   @unique
   phone     String
   birthDate DateTime
+
+  payflowMerchantId String? @map("payflow_merchant_id")
+  payflowWalletId   String? @map("payflow_wallet_id")
+
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
@@ -101,12 +105,16 @@ model MenuItem {
 }
 
 model Order {
-  id        String      @id @default(uuid())
-  status    OrderStatus @default(PENDING)
-  total     Decimal     @db.Decimal(10, 2)
-  notes     String?
-  createdAt DateTime    @default(now())
-  updatedAt DateTime    @updatedAt
+  id     String      @id @default(uuid())
+  status OrderStatus @default(PENDING)
+  total  Decimal     @db.Decimal(10, 2)
+  notes  String?
+
+  payflowTransactionId String?       @unique @map("payflow_transaction_id")
+  paymentStatus        PaymentStatus @default(PENDING) @map("payment_status")
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 
   customerId   String
   Restaurant   Restaurant? @relation(fields: [restaurantId], references: [id])
@@ -141,6 +149,10 @@ model Customer {
   cpf       String   @unique
   phone     String
   birthDate DateTime
+
+  payflowCustomerId String? @map("payflow_customer_id")
+  payflowWalletId   String? @map("payflow_wallet_id")
+
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
@@ -175,4 +187,11 @@ enum OrderStatus {
   DELIVERING
   DELIVERED
   CANCELLED
+}
+
+enum PaymentStatus {
+  PENDING
+  PAID
+  FAILED
+  REFUNDED
 }
