@@ -11,6 +11,8 @@ export type OrderStatus =
     | 'DELIVERED'
     | 'CANCELLED'
 
+export type PaymentStatus = 'PENDING' | 'PAID' | 'FAILED' | 'REFUNDED';
+
 export interface OrderProps {
     customerId: UniqueEntityId;
     restaurantId: UniqueEntityId;
@@ -18,6 +20,8 @@ export interface OrderProps {
     status: OrderStatus;
     total: number;
     notes?: string | null;
+    payflowTransactionId: string | null;
+    paymentStatus: PaymentStatus;
     createdAt: Date;
     updatedAt: Date;
 }
@@ -61,8 +65,28 @@ export class Order extends Entity<OrderProps>{
     get status(): OrderStatus { return this._props.status }
     get total(): number { return this._props.total }
     get notes(): string | null { return this._props.notes ?? null }
+    get payflowTransactionId(): string | null { return this._props.payflowTransactionId }
+    get paymentStatus(): PaymentStatus { return this._props.paymentStatus }
+    get isPaid(): boolean { return this._props.paymentStatus === 'PAID' }
     get createdAt(): Date { return this._props.createdAt }
     get updatedAt(): Date { return this._props.updatedAt }
+
+    linkTransaction(transactionId: string): void {
+        this._props.payflowTransactionId = transactionId;
+        this._props.paymentStatus = 'PAID';
+        this._props.updatedAt = new Date();
+    }
+
+    markPaymentFailed(): void {
+        this._props.paymentStatus = 'FAILED';
+        this._props.status = 'CANCELLED';
+        this._props.updatedAt = new Date();
+    }
+
+    markPaymentRefunded(): void {
+        this._props.paymentStatus = 'REFUNDED';
+        this._props.updatedAt = new Date();
+    }
 
     confirm(): void { this.setStatus('CONFIRMED') }
     startPreparing(): void { this.setStatus('PREPARING') }
