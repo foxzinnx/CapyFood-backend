@@ -12,6 +12,8 @@ export interface CustomerProps {
     cpf: CPF;
     phone: string;
     birthDate: Date;
+    payflowCustomerId: string | null;
+    payflowWalletId: string | null;
     createdAt: Date;
     updatedAt: Date;
 }
@@ -42,6 +44,8 @@ export class Customer extends Entity<CustomerProps>{
             {
                 ...props,
                 name,
+                payflowCustomerId: null,
+                payflowWalletId: null,
                 createdAt: new Date(),
                 updatedAt: new Date()
             },
@@ -55,6 +59,11 @@ export class Customer extends Entity<CustomerProps>{
     get cpf(): CPF { return this._props.cpf }
     get phone(): string { return this._props.phone }
     get birthDate(): Date { return this._props.birthDate }
+    get payflowCustomerId(): string | null { return this._props.payflowCustomerId }
+    get payflowWalletId(): string | null { return this._props.payflowWalletId }
+    get isRegisteredInPayFlow(): boolean {
+        return this._props.payflowCustomerId !== null
+    }
     get createdAt(): Date { return this._props.createdAt }
     get updatedAt(): Date { return this._props.updatedAt }
 
@@ -82,6 +91,12 @@ export class Customer extends Entity<CustomerProps>{
         Customer.validateAge(birthDate);
         this._props.birthDate = birthDate;
         this.touch();
+    }
+
+    linkToPayFlow(customerId: string, walletId: string): void {
+        this._props.payflowCustomerId = customerId;
+        this._props.payflowWalletId = walletId;
+        this._props.updatedAt = new Date();
     }
 
     private static validateAge(birthDate: Date): void {
