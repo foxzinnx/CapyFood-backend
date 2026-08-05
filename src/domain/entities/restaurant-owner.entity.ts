@@ -53,6 +53,9 @@ export class RestaurantOwner extends Entity<RestaurantOwnerProps>{
     get birthDate(): Date { return this._props.birthDate }
     get payflowMerchantId(): string | null { return this._props.payflowMerchantId }
     get payflowWalletId(): string | null { return this._props.payflowWalletId }
+    get isRegisteredInPayFlow(): boolean {
+        return this._props.payflowMerchantId !== null
+    }
     get createdAt(): Date { return this._props.createdAt }
     get updatedAt(): Date { return this._props.updatedAt }
 
