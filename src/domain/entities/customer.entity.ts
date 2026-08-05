@@ -53,6 +53,10 @@ export class Customer extends Entity<CustomerProps>{
         )
     }
 
+    static reconstitute(props: CustomerProps, id: UniqueEntityId): Customer {
+        return new Customer(props, id);
+    }
+
     get name(): Name { return this._props.name }
     get email(): Email { return this._props.email }
     get password(): string { return this._props.password }

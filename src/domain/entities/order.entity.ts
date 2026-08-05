@@ -59,6 +59,10 @@ export class Order extends Entity<OrderProps>{
         )
     }
 
+    static reconstitute(props: OrderProps, id: UniqueEntityId): Order {
+        return new Order(props, id);
+    }
+
     get customerId(): UniqueEntityId { return this._props.customerId }
     get restaurantId(): UniqueEntityId { return this._props.restaurantId }
     get items(): OrderItem[] { return this._props.items }

@@ -55,6 +55,10 @@ export class MenuItem extends Entity<MenuItemProps>{
         )
     }
 
+    static reconstitute(props: MenuItemProps, id: UniqueEntityId): MenuItem {
+        return new MenuItem(props, id);
+    }
+
     get name(): Name { return this._props.name }
     get description(): string | null { return this._props.description ?? null }
     get price(): number { return this._props.price }

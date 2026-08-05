@@ -41,6 +41,10 @@ export class RestaurantOwner extends Entity<RestaurantOwnerProps>{
         )
     }
 
+    static reconstitute(props: RestaurantOwnerProps, id: UniqueEntityId): RestaurantOwner {
+        return new RestaurantOwner(props, id);
+    }
+
     get name(): Name { return this._props.name }
     get email(): Email { return this._props.email }
     get password(): string { return this._props.password }
