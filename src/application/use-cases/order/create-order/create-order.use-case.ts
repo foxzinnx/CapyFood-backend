@@ -11,9 +11,18 @@ import type { CreateOrderInput } from "./create-order.input.js";
 import { OrderItem } from "@/domain/entities/order-item.entity.js";
 import { Order } from "@/domain/entities/order.entity.js";
 import { UniqueEntityId } from "@/domain/value-objects/unique-entity-id.vo.js";
+import { PaymentFailedError } from "@/domain/errors/payment-failed.error.js";
+import { PaymentServiceUnavailableError } from "@/domain/errors/payment-service-unavailable.error.js";
+import type { RestaurantOwnerRepository } from "@/domain/repositories/restaurant-owner.repository.js";
+import { payflowService } from "@/infraestructure/payment/payflow.service.js";
+import { payFlowClient } from "@/infraestructure/payment/payflow.client.js";
 
 type CreateOrderResult = Either<
-    ResourceNotFoundError | RestaurantClosedError | MenuItemUnavailableError,
+    | ResourceNotFoundError 
+    | RestaurantClosedError 
+    | MenuItemUnavailableError
+    | PaymentFailedError
+    | PaymentServiceUnavailableError,
     CreateOrderOutput
 >
 
@@ -22,7 +31,8 @@ export class CreateOrderUseCase {
         private readonly customerRepository: CustomerRepository,
         private readonly restaurantRepository: RestaurantRepository,
         private readonly menuItemRepository: MenuItemRepository,
-        private readonly orderRepository: OrderRepository
+        private readonly orderRepository: OrderRepository,
+        private readonly ownerRepository: RestaurantOwnerRepository
     ){}
 
     async execute(input: CreateOrderInput): Promise<CreateOrderResult>{
@@ -75,6 +85,74 @@ export class CreateOrderUseCase {
 
         await this.orderRepository.create(order);
 
-        return right({ orderId: order.id.value, total: order.total });
+        const owner = await this.ownerRepository.findById(restaurant.ownerId.value);
+        if(!owner){
+            order.markPaymentFailed();
+            await this.orderRepository.save(order);
+            return left(new PaymentServiceUnavailableError());
+        }
+
+        const customerPayFlow = await payflowService.ensureCustomerRegistered(
+            customer,
+            this.customerRepository
+        );
+
+        if(customerPayFlow.isLeft()){
+            order.markPaymentFailed();
+            await this.orderRepository.save(order);
+            return left(new PaymentServiceUnavailableError());
+        }
+
+        const merchantPayFlow = await payflowService.ensureMerchantRegistered(
+            owner,
+            restaurant.name.value,
+            this.ownerRepository
+        );
+
+        if(merchantPayFlow.isLeft()){
+            order.markPaymentFailed();
+            await this.orderRepository.save(order);
+            return left(new PaymentServiceUnavailableError());
+        }
+
+        const amountInCents = Math.round(order.total * 100);
+
+        const transactionResult = await payFlowClient.createTransaction({
+            customerId: customerPayFlow.value.customerId,
+            merchantId: merchantPayFlow.value.merchantId,
+            amountInCents,
+            idempotencyKey: order.id.value,
+            description: `CapyFood - order at ${restaurant.name.value}`,
+            metadata: {
+                orderId: order.id.value,
+                restaurantId: restaurant.id.value,
+                source: 'capyfood'
+            }
+        });
+
+        if(transactionResult.isLeft()){
+            order.markPaymentFailed();
+            await this.orderRepository.save(order);
+            return left(new PaymentServiceUnavailableError());
+        }
+
+        const transaction = transactionResult.value;
+
+        if(transaction.status === 'FAILED'){
+            order.markPaymentFailed();
+            await this.orderRepository.save(order);
+            return left(
+                new PaymentFailedError(transaction.denialReason ?? 'Payment refused')
+            )
+        }
+
+        order.linkTransaction(transaction.id);
+        await this.orderRepository.save(order);
+
+        return right({ 
+            orderId: order.id.value,
+            total: order.total,
+            paymentStatus: order.paymentStatus
+        });
     }
 }
