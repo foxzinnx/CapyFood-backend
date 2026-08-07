@@ -40,7 +40,7 @@ const ownerRepository = new PrismaRestaurantOwnerRepository();
 const restaurantRepository = new PrismaRestaurantRepository();
 const customerRepository = new PrismaCustomerRepository();
 const menuItemRepository = new PrismaMenuItemRepository();
-const orderRepository = new PrismaOrderRepository();
+export const orderRepository = new PrismaOrderRepository();
 const reviewRepository = new PrismaReviewRepository();
 
 const hasher = new BcryptHasher();
@@ -69,7 +69,7 @@ export const createCustomerUseCase = new CreateCustomerUseCase(customerRepositor
 export const authenticateCustomerUseCase = new AuthenticateCustomerUseCase(customerRepository, hasher, encrypter);
 export const getCustomerProfileUseCase = new GetCustomerProfileUseCase(customerRepository);
 
-export const createOrderUseCase = new CreateOrderUseCase(customerRepository, restaurantRepository, menuItemRepository, orderRepository);
+export const createOrderUseCase = new CreateOrderUseCase(customerRepository, restaurantRepository, menuItemRepository, orderRepository, ownerRepository);
 export const getOrderUseCase = new GetOrderUseCase(orderRepository, restaurantRepository);
 export const listCustomerOrdersUseCase = new ListCustomerOrdersUseCase(customerRepository, orderRepository);
 export const listRestaurantOrdersUseCase = new ListRestaurantOrdersUseCase(restaurantRepository, orderRepository);
