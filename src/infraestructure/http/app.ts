@@ -12,6 +12,8 @@ import { orderRoutes } from "./routes/order.routes.js";
 import { reviewRoutes } from "./routes/review.routes.js";
 import { ZodError } from "zod";
 import { payflowWebhookRoutes } from "./routes/payflow-webhook.routes.js";
+import { customerWalletRoutes } from "./routes/customer-wallet.routes.js";
+import { restaurantOwnerWalletRoutes } from "./routes/restaurant-owner-wallet.routes.js";
 
 export async function buildApp(){
     const app = fastify({ logger: true });
@@ -44,6 +46,8 @@ export async function buildApp(){
     await app.register(orderRoutes, { prefix: '/orders' });
     await app.register(reviewRoutes, { prefix: '/restaurants' });
     await app.register(payflowWebhookRoutes);
+    await app.register(customerWalletRoutes, { prefix: '/customers' });
+    await app.register(restaurantOwnerWalletRoutes, { prefix: '/owners' });
 
     app.setErrorHandler((error, _, reply) => {
         if(error instanceof ZodError){
