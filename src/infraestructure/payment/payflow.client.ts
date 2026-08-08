@@ -112,7 +112,7 @@ export class PayflowClient {
         cnpj: string;
         password: string;
     }): Promise<Either<PayFlowError, PayFlowRegisterMerchantResult>>{
-        return this.request('POST', '/api/v1/merchants', data);
+        return this.request('POST', '/api/v1/service/merchants', data);
     }
 
     async createTransaction(data: {
