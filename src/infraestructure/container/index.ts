@@ -37,6 +37,7 @@ import { UpdateOrderStatusUseCase } from "@/application/use-cases/order/update-o
 import { CancelOrderUseCase } from "@/application/use-cases/order/cancel-order/cancel-order.use-case.js";
 import { GetMerchantWalletUseCase } from "@/application/use-cases/restaurant-owner/get-merchant-wallet/get-merchant-wallet.use-case.js";
 import { DepositToWalletUseCase } from "@/application/use-cases/customer/deposit-to-wallet/deposit-to-wallet.use-case.js";
+import { GetCustomerWalletUseCase } from "@/application/use-cases/customer/get-customer-wallet/get-customer-wallet.use-case.js";
 
 const ownerRepository = new PrismaRestaurantOwnerRepository();
 const restaurantRepository = new PrismaRestaurantRepository();
@@ -84,6 +85,7 @@ export const deleteReviewUseCase = new DeleteReviewUseCase(reviewRepository);
 export const listRestaurantReviewsUseCase = new ListRestaurantReviewsUseCase(restaurantRepository, reviewRepository);
 
 export const depositToWalletUseCase = new DepositToWalletUseCase(customerRepository);
+export const getCustomerWalletUseCase = new GetCustomerWalletUseCase(customerRepository);
 export const getMerchantWalletUseCase = new GetMerchantWalletUseCase(ownerRepository);
 
 export { storageService }
