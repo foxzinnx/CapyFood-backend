@@ -99,6 +99,12 @@ export class PayflowClient {
         return this.request('GET', `/api/v1/service/customers/${customerId}/wallet`);
     }
 
+    async getMerchantWallet(
+        merchantId: string
+    ): Promise<Either<PayFlowError, PayFlowWalletResult>>{
+        return this.request('GET', `/api/v1/service/merchants/${merchantId}/wallet`);
+    }
+
     async registerMerchant(data: {
         name: string;
         tradeName: string;
@@ -118,6 +124,21 @@ export class PayflowClient {
         metadata?: Record<string, unknown>
     }): Promise<Either<PayFlowError, PayFlowTransactionResult>>{
         return this.request('POST', '/api/v1/service/transactions', data);
+    }
+
+    async createDeposit(data: {
+        customerId: string;
+        amountInCents: number;
+        currency?: string;
+        method?: 'PIX' | 'TED' | 'BOLETO'
+    }): Promise<Either<PayFlowError, {
+        id: string;
+        amountInCents: number;
+        amountFormatted: string;
+        status: string;
+        method: string;
+    }>>{
+        return this.request('POST', '/api/v1/service/deposits', data);
     }
 
     async refundTransaction(data: {
