@@ -26,7 +26,7 @@ export class RestaurantOwner extends Entity<RestaurantOwnerProps>{
         super(props, id);
     }
 
-    static create(props: Omit<RestaurantOwnerProps, 'createdAt' | 'updatedAt' | 'name'> & { name: string }, id?: UniqueEntityId): RestaurantOwner {
+    static create(props: Omit<RestaurantOwnerProps, 'createdAt' | 'updatedAt' | 'name' | 'payflowMerchantId' | 'payflowWalletId'> & { name: string }, id?: UniqueEntityId): RestaurantOwner {
         const name = Name.create(props.name)
         RestaurantOwner.validateAge(props.birthDate);
         
@@ -34,6 +34,8 @@ export class RestaurantOwner extends Entity<RestaurantOwnerProps>{
             {
                 ...props,
                 name,
+                payflowMerchantId: null,
+                payflowWalletId: null,
                 createdAt: new Date(),
                 updatedAt: new Date()
             },
