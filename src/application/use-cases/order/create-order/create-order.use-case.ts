@@ -16,6 +16,8 @@ import { PaymentServiceUnavailableError } from "@/domain/errors/payment-service-
 import type { RestaurantOwnerRepository } from "@/domain/repositories/restaurant-owner.repository.js";
 import { payflowService } from "@/infraestructure/payment/payflow.service.js";
 import { payFlowClient } from "@/infraestructure/payment/payflow.client.js";
+import type { PayFlowService } from "@/application/ports/payflow-service.js";
+import type { PayFlowClient } from "@/application/ports/payflow-client.js";
 
 type CreateOrderResult = Either<
     | ResourceNotFoundError 
@@ -32,7 +34,9 @@ export class CreateOrderUseCase {
         private readonly restaurantRepository: RestaurantRepository,
         private readonly menuItemRepository: MenuItemRepository,
         private readonly orderRepository: OrderRepository,
-        private readonly ownerRepository: RestaurantOwnerRepository
+        private readonly ownerRepository: RestaurantOwnerRepository,
+        private readonly payFlowService: PayFlowService,
+        private readonly payFlowClient: PayFlowClient
     ){}
 
     async execute(input: CreateOrderInput): Promise<CreateOrderResult>{
@@ -92,7 +96,7 @@ export class CreateOrderUseCase {
             return left(new PaymentServiceUnavailableError());
         }
 
-        const customerPayFlow = await payflowService.ensureCustomerRegistered(
+        const customerPayFlow = await this.payFlowService.ensureCustomerRegistered(
             customer,
             this.customerRepository
         );
@@ -103,7 +107,7 @@ export class CreateOrderUseCase {
             return left(new PaymentServiceUnavailableError());
         }
 
-        const merchantPayFlow = await payflowService.ensureMerchantRegistered(
+        const merchantPayFlow = await this.payFlowService.ensureMerchantRegistered(
             owner,
             restaurant.name.value,
             this.ownerRepository
@@ -117,7 +121,7 @@ export class CreateOrderUseCase {
 
         const amountInCents = Math.round(order.total * 100);
 
-        const transactionResult = await payFlowClient.createTransaction({
+        const transactionResult = await this.payFlowClient.createTransaction({
             customerId: customerPayFlow.value.customerId,
             merchantId: merchantPayFlow.value.merchantId,
             amountInCents,
