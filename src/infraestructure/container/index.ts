@@ -1,6 +1,8 @@
 import { CreateRestaurantOwnerUseCase } from "@/application/use-cases/restaurant-owner/create-restaurant-owner/create-restaurant-owner.use-case.js";
 import { BcryptHasher } from "../cryptography/bcrypt-hasher.js";
 import { JwtEncrypter } from "../cryptography/jwt-encrypter.js";
+import { payFlowClient } from "../payment/payflow.client.js";
+import { payflowService } from '../payment/payflow.service.js';
 import { PrismaCustomerRepository } from "../database/prisma/repositories/prisma-customer.repository.js";
 import { PrismaMenuItemRepository } from "../database/prisma/repositories/prisma-menu-item.repository.js";
 import { PrismaOrderRepository } from "../database/prisma/repositories/prisma-order.repository.js";
@@ -72,7 +74,7 @@ export const createCustomerUseCase = new CreateCustomerUseCase(customerRepositor
 export const authenticateCustomerUseCase = new AuthenticateCustomerUseCase(customerRepository, hasher, encrypter);
 export const getCustomerProfileUseCase = new GetCustomerProfileUseCase(customerRepository);
 
-export const createOrderUseCase = new CreateOrderUseCase(customerRepository, restaurantRepository, menuItemRepository, orderRepository, ownerRepository);
+export const createOrderUseCase = new CreateOrderUseCase(customerRepository, restaurantRepository, menuItemRepository, orderRepository, ownerRepository, payflowService, payFlowClient);
 export const getOrderUseCase = new GetOrderUseCase(orderRepository, restaurantRepository);
 export const listCustomerOrdersUseCase = new ListCustomerOrdersUseCase(customerRepository, orderRepository);
 export const listRestaurantOrdersUseCase = new ListRestaurantOrdersUseCase(restaurantRepository, orderRepository);
