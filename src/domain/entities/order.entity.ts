@@ -43,7 +43,7 @@ export class Order extends Entity<OrderProps>{
         super(props, id)
     }
 
-    static create(props: Omit<OrderProps, 'total' | 'status' | 'createdAt' | 'updatedAt'> & { status?: OrderStatus }, id?: UniqueEntityId): Order {
+    static create(props: Omit<OrderProps, 'total' | 'status' | 'createdAt' | 'updatedAt' | 'payflowTransactionId' | 'paymentStatus'> & { status?: OrderStatus }, id?: UniqueEntityId): Order {
         const validatedItems = Order.validateAndCalculateItems(props.items);
 
         return new Order(
@@ -52,6 +52,8 @@ export class Order extends Entity<OrderProps>{
                 items: validatedItems.items,
                 total: validatedItems.total,
                 status: props.status ?? 'PENDING',
+                payflowTransactionId: null,
+                paymentStatus: 'PENDING',
                 createdAt: new Date(),
                 updatedAt: new Date()
             },

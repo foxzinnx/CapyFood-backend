@@ -36,7 +36,7 @@ export class Customer extends Entity<CustomerProps>{
         super(props, id);
     }
 
-    static create(props: Omit<CustomerProps, 'createdAt' | 'updatedAt' | 'name'> & { name: string }, id?: UniqueEntityId): Customer {
+    static create(props: Omit<CustomerProps, 'createdAt' | 'updatedAt' | 'name' | 'payflowCustomerId' | 'payflowWalletId'> & { name: string }, id?: UniqueEntityId): Customer {
         const name = Name.create(props.name);
         Customer.validateAge(props.birthDate)
         

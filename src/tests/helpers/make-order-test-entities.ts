@@ -10,6 +10,9 @@ import { MenuItem } from "@/domain/entities/menu-item.entity.js";
 import type { InMemoryOrderRepository } from "../repositories/in-memory-order.repository.js";
 import { Order } from "@/domain/entities/order.entity.js";
 import { OrderItem } from "@/domain/entities/order-item.entity.js";
+import { RestaurantOwner } from "@/domain/entities/restaurant-owner.entity.js";
+import { CNPJ } from "@/domain/value-objects/cnpj.vo.js";
+import type { InMemoryRestaurantOwnerRepository } from "../repositories/in-memory-restaurant-owner.repository.js";
 
 export async function makeCustomer(
     customerRepository: InMemoryCustomerRepository,
@@ -28,23 +31,43 @@ export async function makeCustomer(
 }
 
 export async function makeRestaurant(
-    restaurantRepository: InMemoryRestaurantRepository,
-    ownerId: string,
-    overrides: Partial<{ isOpen: boolean }> = {}
+  restaurantRepository: InMemoryRestaurantRepository,
+  ownerId: string,
+  overrides: Partial<{ isOpen: boolean }> = {},
+  ownerRepository?: InMemoryRestaurantOwnerRepository,
 ): Promise<Restaurant> {
+    // Cria o RestaurantOwner com o mesmo ID passado como ownerId
+    // Necessário para use cases que buscam o owner pelo restaurant.ownerId
+    if (ownerRepository) {
+        const alreadyExists = await ownerRepository.findById(ownerId)
+        if (!alreadyExists) {
+            const owner = RestaurantOwner.create(
+                {
+                    name: 'Owner Name',
+                    email: Email.create(`owner_${ownerId}@example.com`),
+                    password: 'hashed-password',
+                    cnpj: CNPJ.create('11222333000181'),
+                    phone: '11999999999',
+                    birthDate: new Date('1990-01-01'),
+                },
+                new UniqueEntityId(ownerId),
+            )
+            await ownerRepository.create(owner)
+        }
+    }
+    
     const restaurant = Restaurant.create({
-        name: 'Capybara Pizza',
-        description: 'As melhores pizzas da cidade',
+        name: 'Pizza Place',
         phone: '11999999999',
-        address: 'Rua Bagre Guimaraes, 123',
+        address: 'Rua das Flores, 123',
         city: 'São Paulo',
         state: 'SP',
         zipCode: '01234567',
         isOpen: overrides.isOpen ?? true,
-        ownerId: new UniqueEntityId(ownerId)
-    });
-    await restaurantRepository.create(restaurant);
-    return restaurant;
+        ownerId: new UniqueEntityId(ownerId),
+    })
+    await restaurantRepository.create(restaurant)
+    return restaurant
 }
 
 export async function makeMenuItem(

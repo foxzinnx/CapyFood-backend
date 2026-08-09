@@ -35,12 +35,15 @@ import { ListRestaurantReviewsUseCase } from "@/application/use-cases/review/lis
 import { GetOrderUseCase } from "@/application/use-cases/order/get-order/get-order.use-case.js";
 import { UpdateOrderStatusUseCase } from "@/application/use-cases/order/update-order-status/update-order-status.use-case.js";
 import { CancelOrderUseCase } from "@/application/use-cases/order/cancel-order/cancel-order.use-case.js";
+import { GetMerchantWalletUseCase } from "@/application/use-cases/restaurant-owner/get-merchant-wallet/get-merchant-wallet.use-case.js";
+import { DepositToWalletUseCase } from "@/application/use-cases/customer/deposit-to-wallet/deposit-to-wallet.use-case.js";
+import { GetCustomerWalletUseCase } from "@/application/use-cases/customer/get-customer-wallet/get-customer-wallet.use-case.js";
 
 const ownerRepository = new PrismaRestaurantOwnerRepository();
 const restaurantRepository = new PrismaRestaurantRepository();
 const customerRepository = new PrismaCustomerRepository();
 const menuItemRepository = new PrismaMenuItemRepository();
-const orderRepository = new PrismaOrderRepository();
+export const orderRepository = new PrismaOrderRepository();
 const reviewRepository = new PrismaReviewRepository();
 
 const hasher = new BcryptHasher();
@@ -69,7 +72,7 @@ export const createCustomerUseCase = new CreateCustomerUseCase(customerRepositor
 export const authenticateCustomerUseCase = new AuthenticateCustomerUseCase(customerRepository, hasher, encrypter);
 export const getCustomerProfileUseCase = new GetCustomerProfileUseCase(customerRepository);
 
-export const createOrderUseCase = new CreateOrderUseCase(customerRepository, restaurantRepository, menuItemRepository, orderRepository);
+export const createOrderUseCase = new CreateOrderUseCase(customerRepository, restaurantRepository, menuItemRepository, orderRepository, ownerRepository);
 export const getOrderUseCase = new GetOrderUseCase(orderRepository, restaurantRepository);
 export const listCustomerOrdersUseCase = new ListCustomerOrdersUseCase(customerRepository, orderRepository);
 export const listRestaurantOrdersUseCase = new ListRestaurantOrdersUseCase(restaurantRepository, orderRepository);
@@ -80,5 +83,9 @@ export const createReviewUseCase = new CreateReviewUseCase(customerRepository, r
 export const updateReviewUseCase = new UpdateReviewUseCase(reviewRepository);
 export const deleteReviewUseCase = new DeleteReviewUseCase(reviewRepository);
 export const listRestaurantReviewsUseCase = new ListRestaurantReviewsUseCase(restaurantRepository, reviewRepository);
+
+export const depositToWalletUseCase = new DepositToWalletUseCase(customerRepository);
+export const getCustomerWalletUseCase = new GetCustomerWalletUseCase(customerRepository);
+export const getMerchantWalletUseCase = new GetMerchantWalletUseCase(ownerRepository);
 
 export { storageService }

@@ -1,15 +1,18 @@
 import { Review } from "@/domain/entities/review.entity.js";
+import { Rating } from "@/domain/value-objects/rating.vo.js";
 import { UniqueEntityId } from "@/domain/value-objects/unique-entity-id.vo.js";
 import type { Review as PrismaReview } from "@/generated/prisma/client.js";
 
 export class ReviewMapper{
     static toDomain(raw: PrismaReview): Review {
-        return Review.create(
+        return Review.reconstitute(
             {
                 customerId: new UniqueEntityId(raw.customerId),
                 restaurantId: new UniqueEntityId(raw.restaurantId),
-                rating: raw.rating,
+                rating: Rating.create(raw.rating),
                 description: raw.description,
+                createdAt: raw.createdAt,
+                updatedAt: raw.updatedAt
             },
             new UniqueEntityId(raw.id)
         )
