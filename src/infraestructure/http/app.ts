@@ -10,7 +10,7 @@ import { menuItemRoutes } from "./routes/menu-item.routes.js";
 import { customerRoutes } from "./routes/customer.routes.js";
 import { orderRoutes } from "./routes/order.routes.js";
 import { reviewRoutes } from "./routes/review.routes.js";
-import { ZodError } from "zod";
+import z, { ZodError } from "zod";
 import { payflowWebhookRoutes } from "./routes/payflow-webhook.routes.js";
 import { customerWalletRoutes } from "./routes/customer-wallet.routes.js";
 import { restaurantOwnerWalletRoutes } from "./routes/restaurant-owner-wallet.routes.js";
@@ -53,7 +53,7 @@ export async function buildApp(){
         if(error instanceof ZodError){
             return reply.status(422).send({
                 message: 'Validation error',
-                errors: error.flatten().fieldErrors
+                errors: z.flattenError(error).fieldErrors
             })
         }
 
