@@ -25,7 +25,7 @@ export class MenuItemController {
             }
         }
         
-        const body = createMenuItemSchema.parse(request.body);
+        const body = createMenuItemSchema.parse(fields);
 
         let imageUrl: string | undefined;
 
