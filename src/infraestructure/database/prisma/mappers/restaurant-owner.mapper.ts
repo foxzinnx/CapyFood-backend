@@ -33,8 +33,8 @@ export class RestaurantOwnerMapper{
             cnpj: owner.cnpj.value,
             phone: owner.phone,
             birthDate: owner.birthDate,
-            payflowMerchantId: owner.payflowMerchantId ?? undefined,
-            payflowWalletId: owner.payflowWalletId ?? undefined,
+            payflowMerchantId: owner.payflowMerchantId ?? null,
+            payflowWalletId: owner.payflowWalletId ?? null,
             createdAt: owner.createdAt,
             updatedAt: owner.updatedAt
         }

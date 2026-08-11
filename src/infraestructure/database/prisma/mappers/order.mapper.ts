@@ -46,7 +46,7 @@ export class OrderMapper {
             status: order.status as PrismaOrderStatus,
             total: order.total,
             notes: order.notes ?? null,
-            payflowTransactionId: order.payflowTransactionId ?? undefined,
+            payflowTransactionId: order.payflowTransactionId ?? null,
             paymentStatus: order.paymentStatus,
             createdAt: order.createdAt,
             updatedAt: order.updatedAt

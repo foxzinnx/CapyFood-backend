@@ -22,7 +22,7 @@ export class RestaurantMapper{
                 state: raw.state,
                 zipCode: raw.zipCode,
                 isOpen: raw.isOpen,
-                ownerId: new UniqueEntityId(raw.id),
+                ownerId: new UniqueEntityId(raw.ownerId),
                 businessHours: (raw.businessHours ?? []).map((bh) => ({
                     dayOfWeek: bh.dayOfWeek,
                     openTime: bh.openTime,

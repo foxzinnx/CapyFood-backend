@@ -33,8 +33,8 @@ export class CustomerMapper{
             cpf: customer.cpf.value,
             phone: customer.phone,
             birthDate: customer.birthDate,
-            payflowCustomerId: customer.payflowCustomerId ?? undefined,
-            payflowWalletId: customer.payflowWalletId ?? undefined,
+            payflowCustomerId: customer.payflowCustomerId ?? null,
+            payflowWalletId: customer.payflowWalletId ?? null,
             createdAt: customer.createdAt,
             updatedAt: customer.updatedAt
         }
