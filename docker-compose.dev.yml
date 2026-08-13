@@ -1,0 +1,21 @@
+services:
+    db:
+        image: postgres:16-alpine
+        container_name: capyfood_db_dev
+        restart: unless-stopped
+        environment:
+            POSTGRES_USER: capyfood
+            POSTGRES_PASSWORD: capyfood123
+            POSTGRES_DB: capyfood_db
+        ports:
+          - '5433:5432'
+        volumes:
+          - postgres_data_dev:/var/lib/postgresql/data
+        healthcheck:
+            test: ['CMD-SHELL', 'pg_isready -U capyfood -d capyfood_db']
+            interval: 5s
+            timeout: 5s
+            retries: 5
+
+volumes:
+    postgres_data_dev:
