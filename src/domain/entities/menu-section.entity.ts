@@ -42,7 +42,7 @@ export class MenuSection extends Entity<MenuSectionProps>{
     get createdAt(): Date { return this._props.createdAt }
     get updatedAt(): Date { return this._props.updatedAt }
 
-    updateDetails(data: { name?: string; description?: string | null }): void {
+    updateDetails(data: { name?: string | undefined; description?: string | null | undefined }): void {
         if(data.name !== undefined){
             this._props.name = Name.create(data.name);
         }
