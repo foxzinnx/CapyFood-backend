@@ -7,6 +7,7 @@ import type { CreateMenuItemOutput } from "./create-menu-item.output.js";
 import type { CreateMenuItemInput } from "./create-menu-item.input.js";
 import { MenuItem } from "@/domain/entities/menu-item.entity.js";
 import { UniqueEntityId } from "@/domain/value-objects/unique-entity-id.vo.js";
+import type { MenuSectionRepository } from "@/domain/repositories/menu-section.repository.js";
 
 type CreateMenuItemResult = Either<
     ResourceNotFoundError | NotAllowedError,
@@ -16,7 +17,8 @@ type CreateMenuItemResult = Either<
 export class CreateMenuItemUseCase{
     constructor(
         private readonly restaurantRepository: RestaurantRepository,
-        private readonly menuItemRepository: MenuItemRepository
+        private readonly menuItemRepository: MenuItemRepository,
+        private readonly menuSectionRepository: MenuSectionRepository
     ){}
 
     async execute(input: CreateMenuItemInput): Promise<CreateMenuItemResult>{
@@ -27,6 +29,18 @@ export class CreateMenuItemUseCase{
 
         if(restaurant.ownerId.value !== input.ownerId){
             return left(new NotAllowedError());
+        }
+
+        if(input.sectionId){
+            const section = await this.menuSectionRepository.findById(input.sectionId);
+            if(!section){
+                return left(new ResourceNotFoundError('Section'));
+            }
+
+            const sectionRestaurant = await this.restaurantRepository.findByMenuId(section.menuId.value);
+            if(sectionRestaurant?.id.value !== input.restaurantId){
+                return left(new NotAllowedError());
+            }
         }
 
         let menuId = await this.menuItemRepository.findMenuIdByRestaurantId(input.restaurantId);
@@ -40,7 +54,8 @@ export class CreateMenuItemUseCase{
             price: input.price,
             imageUrl: input.imageUrl ?? null,
             isAvailable: true,
-            menuId: new UniqueEntityId(menuId)
+            menuId: new UniqueEntityId(menuId),
+            sectionId: input.sectionId ? new UniqueEntityId(input.sectionId): null
         });
 
         await this.menuItemRepository.createMenuItem(menuItem);
