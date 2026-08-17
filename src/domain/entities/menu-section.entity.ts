@@ -34,6 +34,10 @@ export class MenuSection extends Entity<MenuSectionProps>{
         )
     }
 
+    static reconstitute(props: MenuSectionProps, id: UniqueEntityId): MenuSection {
+        return new MenuSection(props, id);
+    }
+
     get name(): Name { return this._props.name }
     get description(): string | null { return this._props.description ?? null }
     get position(): number { return this._props.position }
