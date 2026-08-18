@@ -1,7 +1,7 @@
 export interface UpdateMenuSectionInput {
     sectionId: string;
     ownerId: string;
-    name?: string;
-    description?: string | null;
-    isActive?: boolean;
+    name?: string | undefined;
+    description?: string | null | undefined;
+    isActive?: boolean | undefined;
 }
