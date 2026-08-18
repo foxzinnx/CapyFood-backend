@@ -4,11 +4,13 @@ import { NotAllowedError } from "@/domain/errors/not-allowed.error.js";
 import { ResourceNotFoundError } from "@/domain/errors/resource-not-found.error.js";
 import { UniqueEntityId } from "@/domain/value-objects/unique-entity-id.vo.js";
 import { InMemoryMenuItemRepository } from "@/tests/repositories/in-memory-menu-item.repository.js";
+import { InMemoryMenuSectionRepository } from "@/tests/repositories/in-memory-menu-section.repository.js";
 import { InMemoryRestaurantRepository } from "@/tests/repositories/in-memory-restaurant.repository.js";
 import { beforeEach, describe, expect, it } from "vitest";
 
 let restaurantRepository: InMemoryRestaurantRepository;
 let menuItemRepository: InMemoryMenuItemRepository;
+let menuSectionRepository: InMemoryMenuSectionRepository;
 let sut: CreateMenuItemUseCase;
 
 async function createRestaurant(
@@ -34,7 +36,8 @@ describe('CreateMenuItemUseCase', () => {
     beforeEach(() => {
         restaurantRepository = new InMemoryRestaurantRepository();
         menuItemRepository = new InMemoryMenuItemRepository();
-        sut = new CreateMenuItemUseCase(restaurantRepository, menuItemRepository);
+        menuSectionRepository = new InMemoryMenuSectionRepository();
+        sut = new CreateMenuItemUseCase(restaurantRepository, menuItemRepository, menuSectionRepository);
     });
 
     it('should create a menu item, creating the menu on first item', async () => {

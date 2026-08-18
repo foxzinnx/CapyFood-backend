@@ -3,18 +3,21 @@ import { MenuItem } from "@/domain/entities/menu-item.entity.js";
 import { Restaurant } from "@/domain/entities/restaurant.entity.js";
 import { UniqueEntityId } from "@/domain/value-objects/unique-entity-id.vo.js";
 import { InMemoryMenuItemRepository } from "@/tests/repositories/in-memory-menu-item.repository.js";
+import { InMemoryMenuSectionRepository } from "@/tests/repositories/in-memory-menu-section.repository.js";
 import { InMemoryRestaurantRepository } from "@/tests/repositories/in-memory-restaurant.repository.js";
 import { beforeEach, describe, expect, it } from "vitest";
 
 let restaurantRepository: InMemoryRestaurantRepository;
 let menuItemRepository: InMemoryMenuItemRepository;
+let menuSectionRepository: InMemoryMenuSectionRepository;
 let sut: ListMenuItemsUseCase;
 
 describe('ListMenuItemsUseCase', () => {
     beforeEach(() => {
         restaurantRepository = new InMemoryRestaurantRepository();
         menuItemRepository = new InMemoryMenuItemRepository();
-        sut = new ListMenuItemsUseCase(restaurantRepository, menuItemRepository);
+        menuSectionRepository = new InMemoryMenuSectionRepository();
+        sut = new ListMenuItemsUseCase(restaurantRepository, menuItemRepository, menuSectionRepository);
     });
 
     it('should list all menu items of a restaurant', async () => {
@@ -55,7 +58,8 @@ describe('ListMenuItemsUseCase', () => {
 
         expect(result.isRight()).toBe(true);
         if(result.isRight()){
-            expect(result.value.menuItems).toHaveLength(2);
+            expect(result.value.sections).toEqual([]);
+            expect(result.value.unsectioned).toHaveLength(2);
         }
     });
 
@@ -77,7 +81,8 @@ describe('ListMenuItemsUseCase', () => {
 
         expect(result.isRight()).toBe(true);
         if(result.isRight()){
-            expect(result.value.menuItems).toEqual([]);
+            expect(result.value.sections).toEqual([]);
+            expect(result.value.unsectioned).toEqual([]);
         }
     })
 })
