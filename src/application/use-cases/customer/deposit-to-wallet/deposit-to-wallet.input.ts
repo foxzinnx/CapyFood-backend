@@ -1,4 +1,4 @@
 export interface DepositToWalletInput {
     amountInCents: number;
-    method?: 'PIX' | 'TED' | 'BOLETO'
+    method?: 'PIX' | 'TED' | 'BOLETO' | undefined
 }

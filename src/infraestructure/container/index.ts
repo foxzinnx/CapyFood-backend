@@ -40,6 +40,11 @@ import { CancelOrderUseCase } from "@/application/use-cases/order/cancel-order/c
 import { GetMerchantWalletUseCase } from "@/application/use-cases/restaurant-owner/get-merchant-wallet/get-merchant-wallet.use-case.js";
 import { DepositToWalletUseCase } from "@/application/use-cases/customer/deposit-to-wallet/deposit-to-wallet.use-case.js";
 import { GetCustomerWalletUseCase } from "@/application/use-cases/customer/get-customer-wallet/get-customer-wallet.use-case.js";
+import { PrismaMenuSectionRepository } from "../database/prisma/repositories/prisma-menu-section.repository.js";
+import { CreateMenuSectionUseCase } from "@/application/use-cases/menu-section/create-menu-section/create-menu-section.use-case.js";
+import { UpdateMenuSectionUseCase } from "@/application/use-cases/menu-section/update-menu-section/update-menu-section.use-case.js";
+import { ReorderMenuSectionsUseCase } from "@/application/use-cases/menu-section/reorder-menu-sections/reorder-menu-sections.use-case.js";
+import { DeleteMenuSectionUseCase } from "@/application/use-cases/menu-section/delete-menu-section/delete-menu-section.use-case.js";
 
 const ownerRepository = new PrismaRestaurantOwnerRepository();
 const restaurantRepository = new PrismaRestaurantRepository();
@@ -47,6 +52,7 @@ const customerRepository = new PrismaCustomerRepository();
 const menuItemRepository = new PrismaMenuItemRepository();
 export const orderRepository = new PrismaOrderRepository();
 const reviewRepository = new PrismaReviewRepository();
+const menuSectionRepository = new PrismaMenuSectionRepository();
 
 const hasher = new BcryptHasher();
 const encrypter = new JwtEncrypter();
@@ -63,10 +69,10 @@ export const updateRestaurantHoursUseCase = new UpdateRestaurantHoursUseCase(res
 export const uploadRestaurantPhotoUseCase = new UploadRestaurantPhotoUseCase(restaurantRepository, storageService);
 export const getTopRatedRestaurantsUseCase = new GetTopRatedRestaurantsUseCase(restaurantRepository, reviewRepository);
 
-export const createMenuItemUseCase = new CreateMenuItemUseCase(restaurantRepository, menuItemRepository);
+export const createMenuItemUseCase = new CreateMenuItemUseCase(restaurantRepository, menuItemRepository, menuSectionRepository);
 export const updateMenuItemUseCase = new UpdateMenuItemUseCase(restaurantRepository, menuItemRepository);
 export const deleteMenuItemUseCase = new DeleteMenuItemUseCase(restaurantRepository, menuItemRepository);
-export const listMenuItemsUseCase = new ListMenuItemsUseCase(restaurantRepository, menuItemRepository);
+export const listMenuItemsUseCase = new ListMenuItemsUseCase(restaurantRepository, menuItemRepository, menuSectionRepository);
 export const uploadMenuItemPhotoUseCase = new UploadMenuItemPhotoUseCase(restaurantRepository, menuItemRepository, storageService);
 export const getFeaturedMenuItemsUseCase = new GetFeaturedMenuItemsUseCase(menuItemRepository);
 
@@ -89,5 +95,10 @@ export const listRestaurantReviewsUseCase = new ListRestaurantReviewsUseCase(res
 export const depositToWalletUseCase = new DepositToWalletUseCase(customerRepository);
 export const getCustomerWalletUseCase = new GetCustomerWalletUseCase(customerRepository);
 export const getMerchantWalletUseCase = new GetMerchantWalletUseCase(ownerRepository);
+
+export const createMenuSectionUseCase = new CreateMenuSectionUseCase(restaurantRepository, menuItemRepository, menuSectionRepository);
+export const updateMenuSectionUseCase = new UpdateMenuSectionUseCase(restaurantRepository, menuSectionRepository);
+export const reorderMenuSectionsUseCase = new ReorderMenuSectionsUseCase(restaurantRepository, menuSectionRepository);
+export const deleteMenuSectionUseCase = new DeleteMenuSectionUseCase(restaurantRepository, menuSectionRepository);
 
 export { storageService }

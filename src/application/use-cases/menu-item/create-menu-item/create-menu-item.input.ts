@@ -5,4 +5,5 @@ export interface CreateMenuItemInput {
     description?: string | undefined;
     price: number;
     imageUrl?: string | undefined;
+    sectionId?: string;
 }

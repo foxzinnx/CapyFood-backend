@@ -10,6 +10,7 @@ export interface MenuItemProps {
     imageUrl?: string | null;
     isAvailable: boolean;
     menuId: UniqueEntityId;
+    sectionId?: UniqueEntityId | null;
     createdAt: Date;
     updatedAt: Date;
 }
@@ -22,6 +23,7 @@ export interface MenuItemOutputDTO {
     imageUrl?: string | null;
     isAvailable: boolean;
     menuId: string;
+    sectionId?: string | null;
     createdAt: Date;
     updatedAt: Date;
 }
@@ -65,6 +67,7 @@ export class MenuItem extends Entity<MenuItemProps>{
     get imageUrl(): string | null { return this._props.imageUrl ?? null }
     get isAvailable(): boolean { return this._props.isAvailable }
     get menuId(): UniqueEntityId { return this._props.menuId }
+    get sectionId(): UniqueEntityId | null { return this._props.sectionId ?? null }
     get createdAt(): Date { return this._props.createdAt }
     get updatedAt(): Date { return this._props.updatedAt }
 
@@ -108,6 +111,7 @@ export class MenuItem extends Entity<MenuItemProps>{
             imageUrl: this._props.imageUrl ?? null,
             isAvailable: this._props.isAvailable,
             menuId: this._props.menuId.value,
+            sectionId: this._props.sectionId?.value ?? null,
             createdAt: this._props.createdAt!,
             updatedAt: this._props.updatedAt!
         }
