@@ -11,6 +11,9 @@ jobs:
         name: Tests
         runs-on: ubuntu-latest
 
+        env:
+            DATABASE_URL: "file:./db_test.db"
+
         steps:
             - name: Checkout node
               uses: actions/checkout@v4
