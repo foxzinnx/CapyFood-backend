@@ -4,7 +4,15 @@ import type { MenuSectionRepository } from "@/domain/repositories/menu-section.r
 export class InMemoryMenuSectionRepository implements MenuSectionRepository {
     public sections: MenuSection[] = [];
 
-    constructor(private readonly menus: { id: string; restaurantId: string }[] = []) {}
+    private menus: { id: string; restaurantId: string }[];
+
+    constructor(menus: { id: string; restaurantId: string }[] = []) {
+        this.menus = menus;
+    }
+
+    linkMenuToRestaurant(menuId: string, restaurantId: string): void {
+        this.menus.push({ id: menuId, restaurantId });
+    }
 
     async create(section: MenuSection): Promise<void> {
         this.sections.push(section);
