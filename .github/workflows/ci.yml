@@ -29,3 +29,14 @@ jobs:
 
             - name: Run tests
               run: npm test
+              env:
+                NODE_ENV: test
+                DATABASE_URL: postgresql://test:test@localhost:5432/test
+                JWT_SECRET: test-secret-key-with-at-least-32-characters
+                CLOUDINARY_CLOUD_NAME: test-cloud
+                CLOUDINARY_API_KEY: test-api-key
+                CLOUDINARY_API_SECRET: test-api-secret
+                PAYFLOW_URL: https://payflow.test
+                PAYFLOW_API_KEY: test-payflow-api-key
+                PAYFLOW_WEBHOOK_SECRET: test-payflow-webhook-secret
+                PAYFLOW_PASSWORD_SECRET: test-payflow-password-secret
