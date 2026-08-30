@@ -20,7 +20,8 @@ export async function buildApp(){
     const app = fastify({ logger: true });
 
     await app.register(fastifyCors, {
-        origin: '*'
+        origin: '*',
+        methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE', 'OPTIONS'],
     });
 
     await app.register(fastifyJwt, {
