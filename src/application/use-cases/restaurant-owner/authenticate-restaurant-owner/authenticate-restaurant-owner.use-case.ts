@@ -6,6 +6,7 @@ import { left, right, type Either } from "@/shared/either.js";
 import type { AuthenticateRestaurantOwnerOutput } from "./authenticate-restaurant-owner.output.js";
 import type { AuthenticateRestaurantOwnerInput } from "./authenticate-restaurant-owner.input.js";
 import { Email } from "@/domain/value-objects/email.vo.js";
+import type { GenerateTokenPairService } from "@/application/services/generate-token-pair.service.js";
 
 type AuthenticateRestaurantOwnerResult = Either<
     InvalidCredentialsError,
@@ -16,7 +17,7 @@ export class AuthenticateRestaurantOwnerUseCase{
     constructor(
         private readonly ownerRepository: RestaurantOwnerRepository,
         private readonly hasher: Hasher,
-        private readonly encrypter: Encrypter
+        private readonly generateTokenPair: GenerateTokenPairService
     ){}
 
     async execute(input: AuthenticateRestaurantOwnerInput): Promise<AuthenticateRestaurantOwnerResult>{
@@ -32,11 +33,8 @@ export class AuthenticateRestaurantOwnerUseCase{
             return left(new InvalidCredentialsError());
         }
 
-        const accessToken = await this.encrypter.encrypt({
-            sub: owner.id.value,
-            role: 'OWNER'
-        });
+        const tokens = await this.generateTokenPair.execute(owner.id.value, 'OWNER');
 
-        return right({ accessToken });
+        return right(tokens);
     }
 }
