@@ -6,6 +6,7 @@ import { InvalidCredentialsError } from "@/domain/errors/invalid-credentials.err
 import type { AuthenticateCustomerOutput } from "./authenticate-customer.output.js";
 import type { Hasher } from "@/application/ports/hasher.js";
 import { Email } from "@/domain/value-objects/email.vo.js";
+import type { GenerateTokenPairService } from "@/application/services/generate-token-pair.service.js";
 
 type AuthenticateCustomerResult = Either<
     InvalidCredentialsError,
@@ -16,7 +17,7 @@ export class AuthenticateCustomerUseCase{
     constructor(
         private readonly customerRepository: CustomerRepository,
         private readonly hasher: Hasher,
-        private readonly encrypter: Encrypter
+        private readonly generateTokenPair: GenerateTokenPairService
     ){}
 
     async execute(input: AuthenticateCustomerInput): Promise<AuthenticateCustomerResult> {
@@ -32,11 +33,8 @@ export class AuthenticateCustomerUseCase{
             return left(new InvalidCredentialsError());
         }
 
-        const accessToken = await this.encrypter.encrypt({
-            sub: customer.id.value,
-            role: 'CUSTOMER',
-        });
+        const tokens = await this.generateTokenPair.execute(customer.id.value, 'CUSTOMER');
 
-        return right({ accessToken });
+        return right(tokens);
     }
 }
