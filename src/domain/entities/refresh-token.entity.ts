@@ -28,6 +28,10 @@ export class RefreshToken extends Entity<RefreshTokenProps>{
         )
     }
 
+    static reconstitute(props: RefreshTokenProps, id: UniqueEntityId): RefreshToken {
+        return new RefreshToken(props, id);
+    }
+
     get userId(): UniqueEntityId { return this._props.userId }
     get role(): UserRole { return this._props.role }
     get tokenHash(): string { return this._props.tokenHash }
