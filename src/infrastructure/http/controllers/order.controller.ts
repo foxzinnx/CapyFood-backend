@@ -1,6 +1,6 @@
 import type { FastifyReply, FastifyRequest } from "fastify";
 import { createOrderSchema, orderIdSchema, orderQuerySchema, orderStatusSchema } from "../schemas/order.schema.js";
-import { cancelOrderUseCase, createOrderUseCase, getOrderUseCase, listCustomerOrdersUseCase, listRestaurantOrdersUseCase, updateOrderStatusUseCase } from "@/infraestructure/container/index.js";
+import { cancelOrderUseCase, createOrderUseCase, getOrderUseCase, listCustomerOrdersUseCase, listRestaurantOrdersUseCase, updateOrderStatusUseCase } from "@/infrastructure/container/index.js";
 import { handleError } from "../helpers/handle-error.js";
 import { restaurantIdSchema } from "../schemas/restaurant.schema.js";
 

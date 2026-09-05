@@ -1,6 +1,6 @@
 import type { FastifyReply, FastifyRequest } from "fastify";
 import { createRestaurantSchema, getTopRatedRestaurantsSchema, listRestaurantsSchema, restaurantIdSchema, updateRestaurantHoursSchema } from "../schemas/restaurant.schema.js";
-import { createRestaurantUseCase, getRestaurantUseCase, getTopRatedRestaurantsUseCase, listRestaurantsUseCase, toggleRestaurantStatusUseCase, updateRestaurantHoursUseCase, uploadRestaurantPhotoUseCase } from "@/infraestructure/container/index.js";
+import { createRestaurantUseCase, getRestaurantUseCase, getTopRatedRestaurantsUseCase, listRestaurantsUseCase, toggleRestaurantStatusUseCase, updateRestaurantHoursUseCase, uploadRestaurantPhotoUseCase } from "@/infrastructure/container/index.js";
 import { handleError } from "../helpers/handle-error.js";
 
 export class RestaurantController {

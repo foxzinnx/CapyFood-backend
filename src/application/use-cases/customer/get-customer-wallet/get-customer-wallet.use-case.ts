@@ -4,8 +4,8 @@ import { left, right, type Either } from "@/shared/either.js";
 import type { GetCustomerWalletOutput } from "./get-customer-wallet.output.js";
 import type { CustomerRepository } from "@/domain/repositories/customer.repository.js";
 import type { GetCustomerWalletInput } from "./get-customer-wallet.input.js";
-import { payflowService } from "@/infraestructure/payment/payflow.service.js";
-import { payFlowClient } from "@/infraestructure/payment/payflow.client.js";
+import { payflowService } from "@/infrastructure/payment/payflow.service.js";
+import { payFlowClient } from "@/infrastructure/payment/payflow.client.js";
 
 type GetCustomerWalletResult = Either<
     ResourceNotFoundError | PaymentServiceUnavailableError,

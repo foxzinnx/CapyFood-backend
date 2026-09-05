@@ -1,4 +1,4 @@
-import { depositToWalletUseCase, getCustomerWalletUseCase } from "@/infraestructure/container/index.js";
+import { depositToWalletUseCase, getCustomerWalletUseCase } from "@/infrastructure/container/index.js";
 import type { FastifyReply, FastifyRequest } from "fastify";
 import { handleError } from "../helpers/handle-error.js";
 import { depositToWalletSchema } from "../schemas/wallet.schema.js";

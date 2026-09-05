@@ -4,8 +4,8 @@ import { left, right, type Either } from "@/shared/either.js";
 import type { DepositToWalletOutput } from "./deposit-to-wallet.output.js";
 import type { CustomerRepository } from "@/domain/repositories/customer.repository.js";
 import type { DepositToWalletInput } from "./deposit-to-wallet.input.js";
-import { payflowService } from "@/infraestructure/payment/payflow.service.js";
-import { payFlowClient } from "@/infraestructure/payment/payflow.client.js";
+import { payflowService } from "@/infrastructure/payment/payflow.service.js";
+import { payFlowClient } from "@/infrastructure/payment/payflow.client.js";
 
 export type DepositToWalletResult = Either<
     | ResourceNotFoundError

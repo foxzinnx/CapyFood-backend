@@ -1,7 +1,7 @@
 import type { FastifyReply, FastifyRequest } from "fastify";
 import { restaurantIdSchema } from "../schemas/restaurant.schema.js";
 import { createMenuItemSchema, getFeaturedMenuItemsSchema, menuItemIdSchema, updateMenuItemSchema } from "../schemas/menu-item.schema.js";
-import { createMenuItemUseCase, deleteMenuItemUseCase, getFeaturedMenuItemsUseCase, listMenuItemsUseCase, storageService, updateMenuItemUseCase, uploadMenuItemPhotoUseCase } from "@/infraestructure/container/index.js";
+import { createMenuItemUseCase, deleteMenuItemUseCase, getFeaturedMenuItemsUseCase, listMenuItemsUseCase, storageService, updateMenuItemUseCase, uploadMenuItemPhotoUseCase } from "@/infrastructure/container/index.js";
 import { handleError } from "../helpers/handle-error.js";
 import type { MultipartFile } from "@fastify/multipart";
 

@@ -14,8 +14,8 @@ import { UniqueEntityId } from "@/domain/value-objects/unique-entity-id.vo.js";
 import { PaymentFailedError } from "@/domain/errors/payment-failed.error.js";
 import { PaymentServiceUnavailableError } from "@/domain/errors/payment-service-unavailable.error.js";
 import type { RestaurantOwnerRepository } from "@/domain/repositories/restaurant-owner.repository.js";
-import { payflowService } from "@/infraestructure/payment/payflow.service.js";
-import { payFlowClient } from "@/infraestructure/payment/payflow.client.js";
+import { payflowService } from "@/infrastructure/payment/payflow.service.js";
+import { payFlowClient } from "@/infrastructure/payment/payflow.client.js";
 import type { PayFlowService } from "@/application/ports/payflow-service.js";
 import type { PayFlowClient } from "@/application/ports/payflow-client.js";
 

@@ -1,4 +1,4 @@
-import { getMerchantWalletUseCase } from "@/infraestructure/container/index.js";
+import { getMerchantWalletUseCase } from "@/infrastructure/container/index.js";
 import type { FastifyReply, FastifyRequest } from "fastify";
 import { handleError } from "../helpers/handle-error.js";
 

@@ -1,6 +1,6 @@
 import type { FastifyReply, FastifyRequest } from "fastify";
 import { createReviewSchema, listReviewsQuerySchema, reviewIdSchema, reviewParamsSchema, updateReviewSchema } from "../schemas/review.schema.js";
-import { createReviewUseCase, deleteReviewUseCase, listRestaurantReviewsUseCase, updateReviewUseCase } from "@/infraestructure/container/index.js";
+import { createReviewUseCase, deleteReviewUseCase, listRestaurantReviewsUseCase, updateReviewUseCase } from "@/infrastructure/container/index.js";
 import { handleError } from "../helpers/handle-error.js";
 
 export class ReviewController {

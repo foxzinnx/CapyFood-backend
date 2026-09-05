@@ -1,6 +1,6 @@
 import type { FastifyReply, FastifyRequest } from "fastify";
 import { authenticateOwnerSchema, registerOwnerSchema } from "../schemas/restaurant-owner.schema.js";
-import { authenticateRestaurantOwnerUseCase, createRestaurantOwnerUseCase } from "@/infraestructure/container/index.js";
+import { authenticateRestaurantOwnerUseCase, createRestaurantOwnerUseCase } from "@/infrastructure/container/index.js";
 import { handleError } from "../helpers/handle-error.js";
 
 export class RestaurantOwnerController {

@@ -1,6 +1,6 @@
 import type { FastifyReply, FastifyRequest } from "fastify";
 import { authenticateCustomerSchema, registerCustomerSchema } from "../schemas/customer.schema.js";
-import { authenticateCustomerUseCase, createCustomerUseCase, getCustomerProfileUseCase } from "@/infraestructure/container/index.js";
+import { authenticateCustomerUseCase, createCustomerUseCase, getCustomerProfileUseCase } from "@/infrastructure/container/index.js";
 import { handleError } from "../helpers/handle-error.js";
 
 export class CustomerController {

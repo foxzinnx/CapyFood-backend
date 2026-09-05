@@ -3,8 +3,8 @@ import { ResourceNotFoundError } from "@/domain/errors/resource-not-found.error.
 import { left, right, type Either } from "@/shared/either.js";
 import type { GetMerchantWalletOutput } from "./get-merchant-wallet.output.js";
 import type { RestaurantOwnerRepository } from "@/domain/repositories/restaurant-owner.repository.js";
-import { payflowService } from "@/infraestructure/payment/payflow.service.js";
-import { payFlowClient } from "@/infraestructure/payment/payflow.client.js";
+import { payflowService } from "@/infrastructure/payment/payflow.service.js";
+import { payFlowClient } from "@/infrastructure/payment/payflow.client.js";
 
 export type GetMerchantWalletResult = Either<
     | ResourceNotFoundError

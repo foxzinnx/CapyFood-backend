@@ -1,7 +1,7 @@
 import type { FastifyInstance } from "fastify";
 import crypto from 'crypto'
 import { env } from "@/shared/env/index.js";
-import { orderRepository } from "@/infraestructure/container/index.js";
+import { orderRepository } from "@/infrastructure/container/index.js";
 
 interface WebhookBody{
     event: 'transaction.approved' | 'transaction.failed' | 'transaction.refunded'

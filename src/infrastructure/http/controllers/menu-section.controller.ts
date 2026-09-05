@@ -1,7 +1,7 @@
 import type { FastifyReply, FastifyRequest } from "fastify";
 import { restaurantIdSchema } from "../schemas/restaurant.schema.js";
 import { createMenuSectionSchema, reorderMenuSectionSchema, sectionIdSchema, updateMenuSectionSchema } from "../schemas/menu-section.schema.js";
-import { createMenuSectionUseCase, deleteMenuSectionUseCase, reorderMenuSectionsUseCase, updateMenuSectionUseCase } from "@/infraestructure/container/index.js";
+import { createMenuSectionUseCase, deleteMenuSectionUseCase, reorderMenuSectionsUseCase, updateMenuSectionUseCase } from "@/infrastructure/container/index.js";
 import { handleError } from "../helpers/handle-error.js";
 
 export class MenuSectionController {
